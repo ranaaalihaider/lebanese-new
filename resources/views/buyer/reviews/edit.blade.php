@@ -50,20 +50,61 @@
                             @enderror
                         </div>
 
+                        <!-- Rating Criteria (New) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <!-- As Described -->
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="is_as_described" value="1" class="peer sr-only" {{ old('is_as_described', $review->is_as_described) ? 'checked' : '' }}>
+                                <div
+                                    class="p-4 rounded-xl border-2 border-stone-200 text-stone-500 text-center hover:bg-stone-50 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">
+                                    <div class="text-2xl mb-2">🛍️</div>
+                                    <div class="font-bold text-sm">@trans('As described')</div>
+                                </div>
+                            </label>
+
+                            <!-- Good Packaging -->
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="is_packaging_good" value="1" class="peer sr-only" {{ old('is_packaging_good', $review->is_packaging_good) ? 'checked' : '' }}>
+                                <div
+                                    class="p-4 rounded-xl border-2 border-stone-200 text-stone-500 text-center hover:bg-stone-50 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">
+                                    <div class="text-2xl mb-2">📦</div>
+                                    <div class="font-bold text-sm">@trans('Good packaging')</div>
+                                </div>
+                            </label>
+
+                            <!-- Delivered on Time -->
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="is_delivery_on_time" value="1" class="peer sr-only" {{ old('is_delivery_on_time', $review->is_delivery_on_time) ? 'checked' : '' }}>
+                                <div
+                                    class="p-4 rounded-xl border-2 border-stone-200 text-stone-500 text-center hover:bg-stone-50 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">
+                                    <div class="text-2xl mb-2">🚚</div>
+                                    <div class="font-bold text-sm">@trans('Delivered on time')</div>
+                                </div>
+                            </label>
+                        </div>
+
                         <!-- Comment -->
-                        <div>
-                            <label for="comment" class="block text-sm font-medium text-stone-700 mb-2">@trans('Your Review')</label>
-                            <textarea name="comment" id="comment" rows="4"
+                        <div x-data="{ count: {{ strlen($review->comment ?? '') }} }">
+                            <label for="comment" class="block text-sm font-medium text-stone-700 mb-2">
+                                @trans('Your Review') <span class="text-stone-400 font-normal">(@trans('Optional'))</span>
+                            </label>
+                            <textarea name="comment" id="comment" rows="3" maxlength="120"
+                                @input="count = $event.target.value.length"
                                 class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 placeholder-stone-400"
-                                placeholder="What did you like or dislike? How was the quality?">{{ old('comment', $review->comment) }}</textarea>
+                                placeholder="@trans('Short comment (max 120 chars)')">{{ old('comment', $review->comment) }}</textarea>
+                            <div class="text-right text-xs text-stone-400 mt-1">
+                                <span x-text="count">0</span>/120
+                            </div>
                             @error('comment')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Photo Upload (Simplified) -->
+                        <!-- Photo Upload (Camera First) -->
                         <div>
-                            <label class="block text-sm font-medium text-stone-700 mb-2">@trans('Update Photo')</label>
+                            <label class="block text-sm font-medium text-stone-700 mb-2">
+                                @trans('Update Photo') <span class="text-red-500">*</span>
+                            </label>
 
                             <div class="flex items-center gap-4">
                                 <div
@@ -78,17 +119,20 @@
                                         <svg class="w-6 h-6 mx-auto text-stone-400 group-hover:text-emerald-500" fill="none"
                                             stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 4v16m8-8H4"></path>
+                                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
+                                            </path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         </svg>
-                                        <span class="text-xs text-stone-500 block mt-1">@trans('Change')</span>
+                                        <span class="text-xs text-stone-500 block mt-1">@trans('Cam/File')</span>
                                     </div>
                                     <input type="file" name="image" id="image"
                                         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*"
-                                        onchange="previewFile(this)">
+                                        capture="environment" onchange="previewFile(this)">
                                 </div>
                                 <div class="text-sm text-stone-500">
-                                    <p class="font-medium text-stone-700">@trans('Tap to change image')</p>
-                                    <p class="text-xs mt-1">@trans('JPG, PNG up to 5MB')</p>
+                                    <p class="font-medium text-stone-700">@trans('Upload or Take Photo')</p>
+                                    <p class="text-xs mt-1">@trans('Required to submit')</p>
                                 </div>
                             </div>
 
