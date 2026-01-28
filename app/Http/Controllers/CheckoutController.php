@@ -22,9 +22,6 @@ class CheckoutController extends Controller
             $enabledMethods[] = 'COD';
         if (\App\Models\Setting::getSetting('payment_method_online') == '1')
             $enabledMethods[] = 'Online';
-        // Partial not implemented in checkout loop yet, strictly speaking, but let's allow it in validation if needed, or stick to requested COD/Online for now.
-        // The user request said "COD and Online and partial online".
-        // Let's assume 'Partial' is another value.
         if (\App\Models\Setting::getSetting('payment_method_partial') == '1')
             $enabledMethods[] = 'Partial';
 
@@ -51,6 +48,12 @@ class CheckoutController extends Controller
             'payment_method' => $request->payment_method,
             'status' => 'pending',
         ]);
+
+        // Notify Seller
+        $seller = \App\Models\User::find($product->seller_id);
+        if ($seller) {
+            $seller->notify(new \App\Notifications\NewOrderNotification($order));
+        }
 
         return redirect()->route('buyer.orders.index')->with('success', 'Order placed successfully! Order #' . $order->order_number);
     }
@@ -97,7 +100,7 @@ class CheckoutController extends Controller
             $sellerEarning = $product->price * $item->quantity;
             $platformFee = ($product->final_price * $item->quantity) - $sellerEarning;
 
-            Order::create([
+            $order = Order::create([
                 'order_number' => 'ORD-' . strtoupper(Str::random(8)),
                 'buyer_id' => Auth::id(),
                 'seller_id' => $product->seller_id,
@@ -110,6 +113,12 @@ class CheckoutController extends Controller
                 'payment_method' => $request->payment_method,
                 'status' => 'pending',
             ]);
+
+            // Notify Seller
+            $seller = \App\Models\User::find($product->seller_id);
+            if ($seller) {
+                $seller->notify(new \App\Notifications\NewOrderNotification($order));
+            }
         }
 
         // Clear Cart

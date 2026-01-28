@@ -79,6 +79,12 @@ class AuthController extends Controller
             'longitude' => $request->longitude,
         ]);
 
+        // Notify Admins
+        $admins = \App\Models\User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new \App\Notifications\NewSellerRegisteredNotification($user));
+        }
+
         $this->generateAndSendOtp($user);
 
         return redirect()->route('verify', ['phone' => $user->phone]);

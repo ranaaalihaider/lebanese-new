@@ -11,7 +11,8 @@ class AdminPayoutController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Order::where('status', 'completed')
+        $query = Order::with(['seller.sellerProfile'])
+            ->where('status', 'completed')
             ->whereNotNull('seller_earning');
 
         // Filter by Seller
@@ -88,24 +89,92 @@ class AdminPayoutController extends Controller
             'payout_details' => $payoutDetails,
         ]);
 
+        // Check if seller has any more pending payouts
+        $remainingPending = Order::where('seller_id', $order->seller_id)
+            ->where('status', 'completed')
+            ->where('payout_status', 'pending')
+            ->count();
+
+        if ($remainingPending === 0) {
+            // Find and close the pending payout request
+            $payoutRequest = \App\Models\PayoutRequest::where('seller_id', $order->seller_id)
+                ->where('status', 'pending')
+                ->first();
+
+            if ($payoutRequest) {
+                $payoutRequest->update([
+                    'status' => 'approved',
+                    'processed_at' => now(),
+                    'processed_by' => auth()->id(),
+                ]);
+
+                // Notify Seller
+                $seller = \App\Models\User::find($order->seller_id);
+                if ($seller) {
+                    $seller->notify(new \App\Notifications\PayoutStatusUpdatedNotification($payoutRequest));
+                }
+            }
+        }
+
         return back()->with('success', 'Payout released successfully for Order #' . $order->order_number);
     }
 
-    public function viewRequests()
+    public function viewRequests(Request $request)
     {
-        $requests = \App\Models\PayoutRequest::with(['seller.sellerProfile'])
-            ->pending()
-            ->latestFirst()
-            ->paginate(15);
+        $status = $request->get('status', 'pending');
+
+        $query = \App\Models\PayoutRequest::with(['seller.sellerProfile', 'processedBy'])
+            ->latestFirst();
+
+        // Filter by status
+        if ($status === 'pending') {
+            $query->where('status', 'pending')
+                ->whereHas('seller.sellerOrders', function ($q) {
+                    $q->where('status', 'completed')
+                        ->where('payout_status', 'pending');
+                });
+        } elseif ($status === 'approved') {
+            $query->where('status', 'approved');
+        } elseif ($status === 'rejected') {
+            $query->where('status', 'rejected');
+        }
+
+        $requests = $query->paginate(15);
 
         // Calculate current pending balance for each seller
-        foreach ($requests as $request) {
-            $request->current_pending = Order::where('seller_id', $request->seller_id)
+        foreach ($requests as $payoutRequest) {
+            $payoutRequest->current_pending = Order::where('seller_id', $payoutRequest->seller_id)
                 ->where('status', 'completed')
                 ->where('payout_status', 'pending')
                 ->sum('seller_earning');
         }
 
-        return view('admin.payouts.requests', compact('requests'));
+        return view('admin.payouts.requests', compact('requests', 'status'));
+    }
+
+    public function rejectPayoutRequest(Request $request, \App\Models\PayoutRequest $payoutRequest)
+    {
+        $request->validate([
+            'admin_notes' => 'nullable|string|max:500',
+        ]);
+
+        if ($payoutRequest->status !== 'pending') {
+            return back()->with('error', 'Only pending requests can be rejected.');
+        }
+
+        $payoutRequest->update([
+            'status' => 'rejected',
+            'admin_notes' => $request->admin_notes,
+            'processed_at' => now(),
+            'processed_by' => auth()->id(),
+        ]);
+
+        // Notify Seller
+        $seller = \App\Models\User::find($payoutRequest->seller_id);
+        if ($seller) {
+            $seller->notify(new \App\Notifications\PayoutStatusUpdatedNotification($payoutRequest));
+        }
+
+        return back()->with('success', 'Payout request rejected successfully.');
     }
 }

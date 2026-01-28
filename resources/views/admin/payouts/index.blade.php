@@ -174,8 +174,8 @@
                         <div class="mb-3">
                             <p class="text-xs text-stone-500 uppercase font-bold mb-1">@trans('Seller')</p>
                             <a href="{{ route('admin.stores.show', $order->seller_id) }}"
-                                class="text-sm font-medium text-stone-900 hover:text-emerald-600">
-                                {{ $order->seller->sellerProfile->store_name ?? $order->seller->name }}
+                                class="text-sm font-bold text-emerald-600 hover:text-emerald-700 hover:underline">
+                                {{ $order->seller->sellerProfile->store_name ?: $order->seller->name }}
                             </a>
                             @if($order->seller->sellerProfile)
                                 <p class="text-xs text-stone-500 font-mono mt-1">
@@ -244,10 +244,10 @@
                                         <div class="text-xs text-stone-500">Status: {{ ucfirst($order->status) }}</div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="font-medium text-stone-900">
+                                        <div class="font-bold text-emerald-600">
                                             <a href="{{ route('admin.stores.show', $order->seller_id) }}"
-                                                class="hover:text-emerald-600 hover:underline transition-colors">
-                                                {{ $order->seller->sellerProfile->store_name ?? $order->seller->name }}
+                                                class="hover:text-emerald-700 hover:underline transition-colors">
+                                                {{ $order->seller->sellerProfile->store_name ?: $order->seller->name }}
                                             </a>
                                         </div>
                                         @if($order->seller->sellerProfile)
@@ -332,9 +332,9 @@
 
 <!-- Payout Release Modal -->
 <div id="payoutModal"
-    class="hidden fixed inset-0 bg-stone-900 bg-opacity-50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl transform transition-all scale-100">
-        <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl">
+    class="hidden fixed inset-0 bg-stone-900 bg-opacity-50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl transform transition-all scale-100 max-h-[80vh] md:max-h-[90vh] flex flex-col">
+        <div class="p-4 md:p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl flex-shrink-0">
             <h3 class="text-lg font-bold text-stone-900">@trans('Release Payout')</h3>
             <button onclick="closePayoutModal()" class="text-stone-400 hover:text-stone-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -344,43 +344,59 @@
             </button>
         </div>
 
-        <form id="payoutForm" method="POST">
+        <form id="payoutForm" method="POST" class="flex flex-col min-h-0">
             @csrf
-            <div class="p-6 space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Order Number')</label>
-                    <p id="modalOrderNumber" class="text-lg font-bold text-stone-900">#</p>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Amount to Pay')</label>
-                    <p id="modalAmount" class="text-2xl font-bold text-emerald-600">$0.00</p>
+            <div class="p-5 space-y-5 overflow-y-auto">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <label class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">@trans('Order Number')</label>
+                        <p id="modalOrderNumber" class="text-xl font-bold text-stone-900 tracking-tight">#</p>
+                    </div>
+                    <div class="text-right">
+                        <label class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">@trans('Amount')</label>
+                        <p id="modalAmount" class="text-2xl font-black text-emerald-600 tracking-tight">$0.00</p>
+                    </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-bold text-stone-700 mb-2">@trans('Payment Method')</label>
-                    <select name="payout_method" id="payoutMethodSelect" onchange="toggleBankDetails()"
-                        class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500">
-                        <option value="Bank Transfer">@trans('Bank Transfer')</option>
-                        <option value="Cash">Cash (In-Hand)</option>
-                        <option value="Check">@trans('Check')</option>
-                        <option value="Other">@trans('Other')</option>
-                    </select>
+                    <div class="relative">
+                        <select name="payout_method" id="payoutMethodSelect" onchange="toggleBankDetails()"
+                            class="w-full appearance-none rounded-xl border-stone-200 bg-stone-50 py-3 pl-4 pr-10 text-stone-700 font-medium focus:border-emerald-500 focus:ring-emerald-500 focus:bg-white transition-colors">
+                            <option value="Bank Transfer">@trans('Bank Transfer')</option>
+                            <option value="Cash">Cash (In-Hand)</option>
+                            <option value="Check">@trans('Check')</option>
+                            <option value="Other">@trans('Other')</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-stone-500">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="bankDetailsSection" class="bg-emerald-50 p-3 rounded-lg border border-emerald-100">
-                    <p class="text-xs font-bold text-emerald-700 uppercase mb-1">@trans('Seller Bank Details')</p>
-                    <div class="grid grid-cols-2 gap-2">
+                <div id="bankDetailsSection" class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100/50">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="p-1.5 bg-emerald-100 rounded-lg text-emerald-600">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide">@trans('Seller Bank Details')</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <span class="text-xs text-emerald-600 block">@trans('Bank Name')</span>
-                            <p id="modalBankNameDisplay" class="text-sm text-emerald-900 font-medium">@trans('N/A')</p>
+                            <span class="text-[10px] text-emerald-600/80 font-bold uppercase block mb-0.5">@trans('Bank Name')</span>
+                            <p id="modalBankNameDisplay" class="text-sm text-emerald-950 font-bold">@trans('N/A')</p>
                         </div>
                         <div>
-                            <span class="text-xs text-emerald-600 block">@trans('Account Title')</span>
-                            <p id="modalAccountTitleDisplay" class="text-sm text-emerald-900 font-medium">@trans('N/A')</p>
+                            <span class="text-[10px] text-emerald-600/80 font-bold uppercase block mb-0.5">@trans('Account Title')</span>
+                            <p id="modalAccountTitleDisplay" class="text-sm text-emerald-950 font-bold">@trans('N/A')</p>
                         </div>
-                        <div class="col-span-2">
-                            <span class="text-xs text-emerald-600 block">@trans('Account Number')</span>
-                            <p id="modalAccountNumberDisplay" class="text-sm text-emerald-900 font-mono">@trans('N/A')</p>
+                        <div class="col-span-2 pt-2 border-t border-emerald-100">
+                            <span class="text-[10px] text-emerald-600/80 font-bold uppercase block mb-0.5">@trans('Account Number')</span>
+                            <p id="modalAccountNumberDisplay" class="text-base text-emerald-950 font-mono font-bold tracking-wide">@trans('N/A')</p>
                         </div>
                     </div>
                 </div>
@@ -389,17 +405,21 @@
                     <label class="block text-sm font-bold text-stone-700 mb-2">@trans('Transaction ID / Reference') <span
                             class="text-red-500">*</span></label>
                     <input type="text" name="payout_transaction_id" required
-                        class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500"
+                        class="w-full rounded-xl border-stone-200 bg-stone-50 py-3 px-4 text-stone-900 placeholder-stone-400 focus:border-emerald-500 focus:ring-emerald-500 focus:bg-white transition-all font-medium"
                         placeholder="e.g. TRX-123456789">
                 </div>
             </div>
 
-            <div class="p-6 bg-stone-50 rounded-b-2xl border-t border-stone-100 flex justify-end gap-3">
+            <div class="p-5 bg-stone-50 rounded-b-2xl border-t border-stone-100 flex items-center justify-end gap-3 flex-shrink-0">
                 <button type="button" onclick="closePayoutModal()"
-                    class="px-5 py-2.5 rounded-xl text-stone-600 font-bold hover:bg-stone-200 transition-colors">@trans('Cancel')</button>
+                    class="px-6 py-3 rounded-xl text-stone-500 font-bold hover:bg-stone-200 hover:text-stone-700 transition-colors text-sm">@trans('Cancel')</button>
                 <button type="submit"
-                    class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-200">Confirm
-                    Release</button>
+                    class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 text-sm flex items-center gap-2 transform active:scale-95">
+                    <span>@trans('Confirm Transfer')</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
             </div>
         </form>
     </div>
@@ -407,9 +427,9 @@
 
 <!-- View Payout Details Modal -->
 <div id="viewPayoutModal"
-    class="hidden fixed inset-0 bg-stone-900 bg-opacity-50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl transform transition-all scale-100">
-        <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl">
+    class="hidden fixed inset-0 bg-stone-900 bg-opacity-50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl transform transition-all scale-100 max-h-[80vh] md:max-h-[90vh] flex flex-col">
+        <div class="p-4 md:p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl flex-shrink-0">
             <h3 class="text-lg font-bold text-stone-900">@trans('Payout Details')</h3>
             <button onclick="closeViewPayoutModal()" class="text-stone-400 hover:text-stone-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -419,7 +439,7 @@
             </button>
         </div>
 
-        <div class="p-6 space-y-6">
+        <div class="p-4 md:p-6 space-y-6 overflow-y-auto">
             <!-- Status & Amount -->
             <div class="flex justify-between items-center pb-4 border-b border-stone-100">
                 <div>
@@ -482,7 +502,7 @@
             </div>
         </div>
 
-        <div class="p-6 bg-stone-50 rounded-b-2xl border-t border-stone-100 flex justify-end">
+        <div class="p-4 md:p-6 bg-stone-50 rounded-b-2xl border-t border-stone-100 flex justify-end flex-shrink-0">
             <button onclick="closeViewPayoutModal()"
                 class="px-5 py-2.5 rounded-xl bg-stone-900 text-white font-bold hover:bg-stone-800 transition-colors shadow-lg shadow-stone-200">@trans('Close')</button>
         </div>

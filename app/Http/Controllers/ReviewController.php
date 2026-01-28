@@ -49,9 +49,9 @@ class ReviewController extends Controller
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string|max:120',
             'image' => 'required|image|max:5120', // 5MB max, REQUIRED
-            'is_as_described' => 'required|in:0,1,on',
-            'is_packaging_good' => 'required|in:0,1,on',
-            'is_delivery_on_time' => 'required|in:0,1,on',
+            'is_as_described' => 'nullable|in:1,on',
+            'is_packaging_good' => 'nullable|in:1,on',
+            'is_delivery_on_time' => 'nullable|in:1,on',
         ]);
 
         $imagePath = $request->file('image')->store('reviews', 'public');
@@ -101,9 +101,9 @@ class ReviewController extends Controller
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string|max:120',
             'image' => 'nullable|image|max:5120',
-            'is_as_described' => 'required|in:0,1,on',
-            'is_packaging_good' => 'required|in:0,1,on',
-            'is_delivery_on_time' => 'required|in:0,1,on',
+            'is_as_described' => 'nullable|in:1,on',
+            'is_packaging_good' => 'nullable|in:1,on',
+            'is_delivery_on_time' => 'nullable|in:1,on',
         ]);
 
         $data = [

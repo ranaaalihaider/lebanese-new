@@ -53,7 +53,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <!-- As Described -->
                             <label class="cursor-pointer">
-                                <input type="checkbox" name="is_as_described" value="1" class="peer sr-only" checked>
+                                <input type="checkbox" name="is_as_described" value="1" class="peer sr-only">
                                 <div
                                     class="p-4 rounded-xl border-2 border-stone-200 text-stone-500 text-center hover:bg-stone-50 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">
                                     <div class="text-2xl mb-2">🛍️</div>
@@ -63,7 +63,7 @@
 
                             <!-- Good Packaging -->
                             <label class="cursor-pointer">
-                                <input type="checkbox" name="is_packaging_good" value="1" class="peer sr-only" checked>
+                                <input type="checkbox" name="is_packaging_good" value="1" class="peer sr-only">
                                 <div
                                     class="p-4 rounded-xl border-2 border-stone-200 text-stone-500 text-center hover:bg-stone-50 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">
                                     <div class="text-2xl mb-2">📦</div>
@@ -73,7 +73,7 @@
 
                             <!-- Delivered on Time -->
                             <label class="cursor-pointer">
-                                <input type="checkbox" name="is_delivery_on_time" value="1" class="peer sr-only" checked>
+                                <input type="checkbox" name="is_delivery_on_time" value="1" class="peer sr-only">
                                 <div
                                     class="p-4 rounded-xl border-2 border-stone-200 text-stone-500 text-center hover:bg-stone-50 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">
                                     <div class="text-2xl mb-2">🚚</div>

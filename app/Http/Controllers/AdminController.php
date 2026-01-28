@@ -136,6 +136,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'logo' => 'nullable|image|max:2048', // Max 2MB
+            'whatsapp_number' => 'nullable|string|regex:/^\+?[0-9\s\-\(\)]+$/|max:20',
         ]);
 
         // Handle logo upload

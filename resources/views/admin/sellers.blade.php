@@ -1,100 +1,73 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="min-h-screen bg-stone-50 pb-20 md:pb-6">
-        <!-- WhatsApp-Inspired Mobile Header -->
-        <div class="bg-gradient-to-r from-emerald-600 to-emerald-700 md:bg-white md:border-b md:border-stone-200">
-            <div class="max-w-7xl mx-auto px-4 py-4 md:py-6">
-                <!-- Mobile Header (WhatsApp Style) -->
-                <div class="md:hidden">
-                    <h1 class="text-xl font-bold text-white">@trans('Sellers')</h1>
-                    <p class="text-emerald-100 text-sm mt-0.5">{{ $sellers->total() }} sellers</p>
+    <div class="min-h-screen bg-stone-50 pb-20 md:pb-6 pt-16 md:pt-6">
+
+        <!-- Header Section -->
+        <div class="max-w-7xl mx-auto px-4 md:px-6 mb-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-stone-900">@trans('Sellers')</h1>
+                    <p class="text-sm text-stone-500 mt-1">@trans('Manage registered sellers') • {{ $sellers->total() }}
+                        total</p>
                 </div>
 
-                <!-- Desktop Header -->
-                <div class="hidden md:block">
-                    <h1 class="text-2xl md:text-3xl font-bold text-white">@trans('Seller Management')</h1>
-                    <p class="text-emerald-50 text-sm md:text-base mt-1">@trans('Manage seller accounts and approvals')</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-0 md:px-6 py-0 md:py-8">
-            <!-- Search Bar (WhatsApp Style for Mobile) -->
-            <div class="bg-white md:rounded-2xl md:shadow-sm md:border md:border-stone-200 p-3 md:p-6 mb-3 md:mb-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="hidden md:block text-lg font-bold text-stone-900">@trans('Filters')</h2>
+                <!-- Filter Toggle (Mobile & Desktop) -->
+                <div>
                     <button type="button" onclick="toggleSellerFilters()"
-                        class="hidden md:flex px-4 py-2 bg-stone-100 text-stone-600 rounded-xl items-center gap-2 hover:bg-stone-200 transition-colors text-sm font-bold">
+                        class="w-full md:w-auto px-4 py-2 bg-white border border-stone-200 text-stone-700 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-50 transition-colors text-sm font-semibold shadow-sm">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
                             </path>
                         </svg>
-                        @trans('Toggle Filters')
+                        @trans('Filter & Search')
                     </button>
                 </div>
-                <div id="seller-filters-container" class="{{ request()->anyFilled(['search', 'status']) ? '' : 'hidden' }}">
-                    <form method="GET" class="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-end">
-                        <!-- Search -->
-                        <div class="relative flex-1">
-                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search sellers..."
-                                class="w-full pl-10 pr-4 py-2.5 bg-stone-100 md:bg-white border-0 md:border md:border-stone-300 rounded-full md:rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all">
-                        </div>
+            </div>
 
-                        <!-- Status Filter -->
-                        <div class="md:w-48">
+            <!-- Expandable Filters -->
+            <div id="seller-filters-container"
+                class="mt-4 {{ request()->anyFilled(['search', 'status']) ? '' : 'hidden' }}">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-stone-200">
+                    <form method="GET" class="flex flex-col md:flex-row gap-3 items-end">
+                        <div class="w-full md:flex-1">
+                            <label class="text-xs font-semibold text-stone-500 mb-1 block">@trans('Search')</label>
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                placeholder="Name, Email, Store..."
+                                class="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                        </div>
+                        <div class="w-full md:w-48">
+                            <label class="text-xs font-semibold text-stone-500 mb-1 block">@trans('Status')</label>
                             <select name="status"
-                                class="w-full px-3 py-2.5 border border-stone-300 rounded-full md:rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white">
-                                <option value="">@trans('All Status')</option>
-                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>@trans('Pending')
+                                class="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                                <option value="">@trans('All')</option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>
+                                    @trans('Pending')</option>
+                                <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>@trans('Active')
                                 </option>
-                                <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>@trans('Active')</option>
-                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>@trans('Rejected')
-                                </option>
+                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>
+                                    @trans('Rejected')</option>
                             </select>
                         </div>
-
-                        <!-- Buttons -->
-                        <button type="submit"
-                            class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-full md:rounded-xl font-bold transition-colors">
-                            @trans('Apply')
-                        </button>
-                        @if(request('search') || request('status'))
-                            <a href="{{ route('admin.sellers') }}"
-                                class="bg-stone-200 hover:bg-stone-300 text-stone-700 px-4 py-2.5 rounded-full md:rounded-xl font-bold transition-colors text-center">
-                                @trans('Clear')
-                            </a>
-                        @endif
-
-                        <!-- Mobile Status Filter Pills -->
-                        <div class="md:hidden flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-                            <a href="{{ route('admin.sellers') }}"
-                                class="px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap {{ !request('status') ? 'bg-emerald-600 text-white' : 'bg-stone-100 text-stone-600' }}">
-                                All ({{ $pendingCount + $activeCount + $rejectedCount }})
-                            </a>
-                            <a href="{{ route('admin.sellers', ['status' => 'pending']) }}"
-                                class="px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap {{ request('status') == 'pending' ? 'bg-amber-500 text-white' : 'bg-stone-100 text-stone-600' }}">
-                                Pending ({{ $pendingCount }})
-                            </a>
-                            <a href="{{ route('admin.sellers', ['status' => 'active']) }}"
-                                class="px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap {{ request('status') == 'active' ? 'bg-emerald-500 text-white' : 'bg-stone-100 text-stone-600' }}">
-                                Active ({{ $activeCount }})
-                            </a>
-                            <a href="{{ route('admin.sellers', ['status' => 'rejected']) }}"
-                                class="px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap {{ request('status') == 'rejected' ? 'bg-red-500 text-white' : 'bg-stone-100 text-stone-600' }}">
-                                Rejected ({{ $rejectedCount }})
-                            </a>
+                        <div class="flex gap-2 w-full md:w-auto">
+                            <button type="submit"
+                                class="flex-1 md:flex-none px-4 py-2 bg-stone-900 text-white rounded-lg text-sm font-bold hover:bg-stone-800 transition-colors">
+                                @trans('Apply')
+                            </button>
+                            @if(request('search') || request('status'))
+                                <a href="{{ route('admin.sellers') }}"
+                                    class="px-4 py-2 bg-stone-100 text-stone-600 rounded-lg text-sm font-bold hover:bg-stone-200 transition-colors">
+                                    @trans('Reset')
+                                </a>
+                            @endif
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
 
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
             <script>
                 function toggleSellerFilters() {
                     document.getElementById('seller-filters-container').classList.toggle('hidden');
@@ -102,149 +75,176 @@
             </script>
 
             @if($sellers->count() > 0)
-                <!-- Mobile: WhatsApp-Style List -->
-                <div class="md:hidden bg-white">
+                <!-- Mobile: Compact Cards -->
+                <div class="md:hidden space-y-3">
                     @foreach($sellers as $seller)
-                        <div class="border-b border-stone-100 active:bg-stone-50 transition-colors">
-                            <a href="{{ route('admin.stores.show', $seller->id) }}" class="flex items-center gap-3 p-4">
-                                <!-- Avatar Circle (WhatsApp Style) -->
-                                <div class="flex-shrink-0">
+                        <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                            <div class="p-3">
+                                <a href="{{ route('admin.stores.show', $seller->id) }}" class="flex items-center gap-3">
+                                    <!-- Avatar -->
                                     <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">
-                                        {{ strtoupper(substr($seller->sellerProfile->store_name ?? $seller->name, 0, 1)) }}
+                                        class="w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-bold text-sm border border-stone-200 overflow-hidden
+                                                                {{ ($seller->sellerProfile && $seller->sellerProfile->store_photo) ? 'bg-stone-100' : 'bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-sm' }}">
+                                        @if($seller->sellerProfile && $seller->sellerProfile->store_photo)
+                                            <img src="{{ asset('storage/' . $seller->sellerProfile->store_photo) }}" alt=""
+                                                class="w-full h-full object-cover">
+                                        @else
+                                            {{ strtoupper(substr($seller->sellerProfile->store_name ?? $seller->name, 0, 1)) }}
+                                        @endif
                                     </div>
-                                </div>
 
-                                <!-- Content (WhatsApp Style) -->
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-baseline justify-between mb-0.5">
-                                        <h3 class="font-semibold text-stone-900 truncate">
-                                            {{ $seller->sellerProfile->store_name ?? $seller->name }}
-                                        </h3>
-                                        <span class="text-xs text-stone-400 ml-2">{{ $seller->created_at->format('M d') }}</span>
+                                    <!-- Info -->
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-bold text-stone-900 text-sm truncate pr-2">
+                                                {{ $seller->sellerProfile->store_name ?? $seller->name }}
+                                            </h3>
+                                        </div>
+                                        <p class="text-xs text-stone-500 truncate">{{ $seller->email }}</p>
                                     </div>
-                                    <p class="text-sm text-stone-500 truncate">{{ $seller->email }}</p>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold
-                                                                                                        @if($seller->status === 'pending') bg-amber-100 text-amber-700
-                                                                                                        @elseif($seller->status === 'active') bg-emerald-100 text-emerald-700
-                                                                                                        @else bg-red-100 text-red-700
-                                                                                                        @endif">
-                                            {{ ucfirst($seller->status) }}
+                                </a>
+
+                                <div class="mt-3 pt-3 border-t border-stone-50 flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide
+                                                                                @if($seller->status === 'pending') bg-amber-50 text-amber-600 border border-amber-100
+                                                                                @elseif($seller->status === 'active') bg-emerald-50 text-emerald-600 border border-emerald-100
+                                                                                @else bg-red-50 text-red-600 border border-red-100
+                                                                                @endif">
+                                            {{ $seller->status }}
                                         </span>
-                                        <span class="text-xs text-stone-400">• {{ $seller->products_count ?? 0 }} products</span>
+                                        <span class="text-[10px] font-medium text-stone-500">
+                                            <b class="text-stone-900">{{ $seller->products_count ?? 0 }}</b> products
+                                        </span>
+                                    </div>
+
+                                    <!-- Mobile Actions -->
+                                    <div class="flex items-center gap-2">
+                                        @if($seller->status === 'pending')
+                                            <form method="POST" action="{{ route('admin.sellers.approve', $seller->id) }}"
+                                                class="inline">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="text-emerald-600 hover:text-emerald-700 font-bold text-xs uppercase tracking-wide">@trans('Approve')</button>
+                                            </form>
+                                            <form method="POST" action="{{ route('admin.sellers.reject', $seller->id) }}"
+                                                class="inline">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="text-red-500 hover:text-red-600 font-bold text-xs uppercase tracking-wide">@trans('Reject')</button>
+                                            </form>
+                                        @elseif($seller->status === 'active')
+                                            <form method="POST" action="{{ route('admin.sellers.deactivate', $seller->id) }}"
+                                                class="inline">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="text-orange-500 hover:text-orange-600 font-bold text-xs uppercase tracking-wide">@trans('Deactivate')</button>
+                                            </form>
+                                        @elseif($seller->status === 'rejected')
+                                            <form method="POST" action="{{ route('admin.sellers.activate', $seller->id) }}"
+                                                class="inline">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="text-emerald-600 hover:text-emerald-700 font-bold text-xs uppercase tracking-wide">@trans('Enable')</button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
-
-                                <!-- Chevron -->
-                                <svg class="w-5 h-5 text-stone-300 flex-shrink-0" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
+                            </div>
                         </div>
                     @endforeach
                 </div>
 
-                <!-- Desktop: Professional Table -->
-                <div class="hidden md:block bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                <!-- Desktop: Compact Table -->
+                <div class="hidden md:block bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-stone-200">
                             <thead class="bg-stone-50">
                                 <tr>
-                                    <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
                                         @trans('Seller')</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
                                         @trans('Contact')</th>
-                                    <th class="px-6 py-4 text-center text-xs font-bold text-stone-500 uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-center text-xs font-bold text-stone-500 uppercase tracking-wider">
                                         @trans('Products')</th>
-                                    <th class="px-6 py-4 text-center text-xs font-bold text-stone-500 uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-center text-xs font-bold text-stone-500 uppercase tracking-wider">
                                         @trans('Status')</th>
-                                    <th class="px-6 py-4 text-right text-xs font-bold text-stone-500 uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-right text-xs font-bold text-stone-500 uppercase tracking-wider">
                                         @trans('Actions')</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-stone-200">
                                 @foreach($sellers as $seller)
                                     <tr class="hover:bg-stone-50 transition-colors">
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-4 py-3 whitespace-nowrap">
                                             <div class="flex items-center gap-3">
                                                 <div
-                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold shadow-sm">
-                                                    {{ strtoupper(substr($seller->sellerProfile->store_name ?? $seller->name, 0, 1)) }}
+                                                    class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs border border-stone-200 overflow-hidden
+                                                                {{ ($seller->sellerProfile && $seller->sellerProfile->store_photo) ? 'bg-stone-100' : 'bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-sm' }}">
+                                                    @if($seller->sellerProfile && $seller->sellerProfile->store_photo)
+                                                        <img src="{{ asset('storage/' . $seller->sellerProfile->store_photo) }}" alt=""
+                                                            class="w-full h-full object-cover">
+                                                    @else
+                                                        {{ strtoupper(substr($seller->sellerProfile->store_name ?? $seller->name, 0, 1)) }}
+                                                    @endif
                                                 </div>
                                                 <div>
-                                                    <p class="text-sm font-bold text-stone-900">
+                                                    <p class="text-sm font-bold text-stone-900 leading-none mb-1">
                                                         {{ $seller->sellerProfile->store_name ?? 'No Store Name' }}
                                                     </p>
-                                                    <p class="text-xs text-stone-500">{{ $seller->name }}</p>
+                                                    <p class="text-xs text-stone-500 leading-none">{{ $seller->name }}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4">
-                                            <p class="text-sm text-stone-700">{{ $seller->email }}</p>
-                                            <p class="text-xs text-stone-500">{{ $seller->phone }}</p>
+                                        <td class="px-4 py-3">
+                                            <p class="text-sm text-stone-700 leading-tight">{{ $seller->email }}</p>
+                                            <p class="text-xs text-stone-400 leading-tight">{{ $seller->phone }}</p>
                                         </td>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-lg bg-blue-50 border border-blue-200">
-                                                <span
-                                                    class="text-sm font-bold text-blue-700">{{ $seller->products_count ?? 0 }}</span>
+                                        <td class="px-4 py-3 text-center whitespace-nowrap">
+                                            <span class="text-sm font-bold text-stone-700">{{ $seller->products_count ?? 0 }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center whitespace-nowrap">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wide
+                                                                                    @if($seller->status === 'pending') bg-amber-50 text-amber-600 border border-amber-100
+                                                                                    @elseif($seller->status === 'active') bg-emerald-50 text-emerald-600 border border-emerald-100
+                                                                                    @else bg-red-50 text-red-600 border border-red-100
+                                                                                    @endif">
+                                                {{ $seller->status }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold
-                                                                                                            @if($seller->status === 'pending') bg-amber-100 text-amber-700 border border-amber-200
-                                                                                                            @elseif($seller->status === 'active') bg-emerald-100 text-emerald-700 border border-emerald-200
-                                                                                                            @else bg-red-100 text-red-700 border border-red-200
-                                                                                                            @endif">
-                                                {{ ucfirst($seller->status) }}
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <td class="px-4 py-3 whitespace-nowrap text-right">
                                             <div class="flex items-center justify-end gap-2">
                                                 <a href="{{ route('admin.stores.show', $seller->id) }}"
-                                                    class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                    @trans('View Store')
+                                                    class="text-stone-400 hover:text-emerald-600 font-bold text-xs uppercase tracking-wide transition-colors">
+                                                    @trans('Details')
                                                 </a>
 
                                                 @if($seller->status === 'pending')
-                                                    {{-- Pending: Show Approve and Reject --}}
                                                     <form method="POST" action="{{ route('admin.sellers.approve', $seller->id) }}"
                                                         class="inline">
                                                         @csrf
                                                         <button type="submit"
-                                                            class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                            @trans('Approve')
-                                                        </button>
+                                                            class="text-emerald-600 hover:text-emerald-700 font-bold text-xs uppercase tracking-wide transition-colors ml-2">@trans('Approve')</button>
                                                     </form>
                                                     <form method="POST" action="{{ route('admin.sellers.reject', $seller->id) }}"
                                                         class="inline">
                                                         @csrf
                                                         <button type="submit"
-                                                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                            @trans('Reject')
-                                                        </button>
+                                                            class="text-red-500 hover:text-red-600 font-bold text-xs uppercase tracking-wide transition-colors ml-2">@trans('Reject')</button>
                                                     </form>
                                                 @elseif($seller->status === 'active')
-                                                    {{-- Active: Show Deactivate --}}
                                                     <form method="POST" action="{{ route('admin.sellers.deactivate', $seller->id) }}"
                                                         class="inline">
                                                         @csrf
                                                         <button type="submit"
-                                                            class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                            @trans('Deactivate')
-                                                        </button>
+                                                            class="text-orange-500 hover:text-orange-600 font-bold text-xs uppercase tracking-wide transition-colors ml-2">@trans('Deactivate')</button>
                                                     </form>
                                                 @elseif($seller->status === 'rejected')
-                                                    {{-- Rejected: Show Activate --}}
                                                     <form method="POST" action="{{ route('admin.sellers.activate', $seller->id) }}"
                                                         class="inline">
                                                         @csrf
                                                         <button type="submit"
-                                                            class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                            @trans('Activate')
-                                                        </button>
+                                                            class="text-emerald-600 hover:text-emerald-700 font-bold text-xs uppercase tracking-wide transition-colors ml-2">@trans('Re-Activate')</button>
                                                     </form>
                                                 @endif
                                             </div>
@@ -273,15 +273,4 @@
             @endif
         </div>
     </div>
-
-    <style>
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
 @endsection

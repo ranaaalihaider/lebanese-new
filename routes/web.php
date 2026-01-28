@@ -71,9 +71,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
         Route::post('/settings', [AdminController::class, 'updateSettings'])->name('settings.update');
 
+        // Admin Product Management Routes
+        Route::get('/products/create', [\App\Http\Controllers\AdminProductController::class, 'create'])->name('products.create');
+        Route::post('/products', [\App\Http\Controllers\AdminProductController::class, 'store'])->name('products.store');
+        Route::get('/products/{product}/edit', [\App\Http\Controllers\AdminProductController::class, 'edit'])->name('products.edit');
+        Route::put('/products/{product}', [\App\Http\Controllers\AdminProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{product}', [\App\Http\Controllers\AdminProductController::class, 'destroy'])->name('products.destroy');
+
         Route::get('/payouts', [\App\Http\Controllers\AdminPayoutController::class, 'index'])->name('payouts.index');
         Route::post('/payouts/{order}/release', [\App\Http\Controllers\AdminPayoutController::class, 'payout'])->name('payouts.release');
         Route::get('/payout-requests', [\App\Http\Controllers\AdminPayoutController::class, 'viewRequests'])->name('payout.requests');
+        Route::post('/payout-requests/{payoutRequest}/reject', [\App\Http\Controllers\AdminPayoutController::class, 'rejectPayoutRequest'])->name('payout.requests.reject');
 
 
         Route::resource('product-types', \App\Http\Controllers\ProductTypeController::class)->only(['index', 'store', 'update', 'destroy']);
@@ -89,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/orders/{order}/status', [SellerController::class, 'updateOrderStatus'])->name('orders.update-status');
         Route::get('/earnings', [SellerController::class, 'earnings'])->name('earnings');
         Route::post('/earnings/request-payout', [SellerController::class, 'requestPayout'])->name('payout.request');
+        Route::get('/payout-requests', [\App\Http\Controllers\SellerPayoutRequestController::class, 'index'])->name('payout.requests');
         Route::patch('/products/{product}/toggle-status', [\App\Http\Controllers\ProductController::class, 'toggleStatus'])->name('products.toggle');
 
 
@@ -128,6 +137,29 @@ Route::middleware(['auth'])->group(function () {
     // Wishlist Routes
     Route::get('/buyer/wishlist', [\App\Http\Controllers\WishlistController::class, 'index'])->name('buyer.wishlist.index');
     Route::post('/buyer/wishlist/toggle', [\App\Http\Controllers\WishlistController::class, 'toggle'])->name('buyer.wishlist.toggle');
+
+    // Notifications
+    Route::get('/notifications/{id}/read', function ($id) {
+        $notification = auth()->user()->notifications()->findOrFail($id);
+        $notification->markAsRead();
+        return redirect($notification->data['url'] ?? route('dashboard'));
+    })->name('notifications.read');
+
+    Route::get('/notifications/check', function () {
+        $user = auth()->user();
+        $unreadCount = $user->unreadNotifications->count();
+        $latest = $user->unreadNotifications->first();
+
+        return response()->json([
+            'unread_count' => $unreadCount,
+            'latest' => $latest ? [
+                'title' => 'New Notification', // Or generic title
+                'body' => $latest->data['message'] ?? 'You have a new notification',
+                'url' => route('notifications.read', $latest->id),
+                'created_at' => $latest->created_at->timestamp
+            ] : null
+        ]);
+    })->name('notifications.check');
 });
 
 // Public Buyer Routes

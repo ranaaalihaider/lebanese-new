@@ -65,6 +65,12 @@ class SellerController extends Controller
 
         $order->update(['status' => $request->status]);
 
+        // Notify Buyer
+        $buyer = \App\Models\User::find($order->buyer_id);
+        if ($buyer) {
+            $buyer->notify(new \App\Notifications\OrderStatusChangedNotification($order, $request->status));
+        }
+
         return back()->with('success', 'Order status updated to ' . str_replace('_', ' ', $request->status));
     }
 
@@ -109,12 +115,18 @@ class SellerController extends Controller
             ->where('payout_status', 'pending')
             ->sum('seller_earning');
 
-        // Check for existing payout request
+        // Check for existing pending payout request (for button display)
         $payoutRequest = \App\Models\PayoutRequest::where('seller_id', Auth::id())
             ->where('status', 'pending')
             ->first();
 
-        return view('seller.earnings', compact('orders', 'totalEarnings', 'pendingPayouts', 'payoutRequest'));
+        // Fetch all payout requests for history
+        $payoutRequests = \App\Models\PayoutRequest::where('seller_id', Auth::id())
+            ->with('processedBy')
+            ->latest('requested_at')
+            ->get();
+
+        return view('seller.earnings', compact('orders', 'totalEarnings', 'pendingPayouts', 'payoutRequest', 'payoutRequests'));
 
     }
 
@@ -139,16 +151,22 @@ class SellerController extends Controller
             ->first();
 
         if ($existingRequest) {
-            return back()->with('error', 'You already have a pending payout request.');
+            return back()->with('error', 'You already have a pending payout request. Please wait for it to be processed.');
         }
 
         // Create payout request
-        \App\Models\PayoutRequest::create([
+        $payoutRequest = \App\Models\PayoutRequest::create([
             'seller_id' => $user->id,
             'requested_amount' => $pendingPayouts,
             'status' => 'pending',
             'requested_at' => now(),
         ]);
+
+        // Notify Admins
+        $admins = \App\Models\User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new \App\Notifications\PayoutRequestNotification($payoutRequest));
+        }
 
         return back()->with('success', 'Payout request submitted successfully! Admin will review it soon.');
     }

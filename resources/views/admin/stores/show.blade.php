@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto py-4 px-3 md:py-10 md:px-6 lg:px-8">
         <!-- Back Button -->
         <a href="{{ route('admin.sellers') }}"
             class="inline-flex items-center text-sm text-stone-500 hover:text-emerald-600 mb-6 transition-colors font-medium">
@@ -12,26 +12,25 @@
         </a>
 
         <!-- Store Header -->
-        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 md:p-8 mb-6">
+        <div class="bg-white rounded-xl shadow-sm border border-stone-100 p-4 md:p-8 mb-4 md:mb-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 class="text-3xl font-bold text-stone-900">{{ $seller->sellerProfile->store_name ?? $seller->name }}
+                    <h1 class="text-2xl md:text-3xl font-bold text-stone-900">{{ $seller->sellerProfile->store_name ?? $seller->name }}
                     </h1>
                     @if($seller->sellerProfile->store_tagline)
-                        <p class="text-stone-500 mt-1">{{ $seller->sellerProfile->store_tagline }}</p>
+                        <p class="text-stone-500 mt-1 max-w-2xl">{{ $seller->sellerProfile->store_tagline }}</p>
                     @endif
-                    <div class="flex gap-4 text-sm text-stone-500 mt-2">
-                        <p>@trans('Owner:') <span class="font-bold text-stone-700">{{ $seller->name }}</span></p>
-                        <p>•</p>
-                        <p>@trans('Phone:') <a href="tel:{{ $seller->phone }}"
+                    <div class="flex flex-wrap gap-2 md:gap-4 text-xs md:text-sm text-stone-500 mt-3">
+                        <p class="bg-stone-50 px-2 py-1 rounded-md border border-stone-100">@trans('Owner:') <span class="font-bold text-stone-700">{{ $seller->name }}</span></p>
+                        <p class="bg-stone-50 px-2 py-1 rounded-md border border-stone-100">@trans('Phone:') <a href="tel:{{ $seller->phone }}"
                                 class="text-emerald-600 hover:underline font-bold">{{ $seller->phone }}</a></p>
                     </div>
                 </div>
 
                 <!-- Action Button -->
                 <a href="{{ route('admin.sellers.edit', $seller->id) }}"
-                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm">
-                    @trans('Edit Seller Account')
+                    class="w-full md:w-auto text-center bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-colors shadow-sm">
+                    @trans('Edit Profile')
                 </a>
             </div>
         </div>
@@ -63,7 +62,8 @@
                     <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border border-blue-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-blue-600 uppercase tracking-wide">@trans('Total Products')</p>
+                                <p class="text-xs font-bold text-blue-600 uppercase tracking-wide">@trans('Total Products')
+                                </p>
                                 <p class="text-3xl font-bold text-blue-900 mt-1">{{ $totalProducts }}</p>
                             </div>
                             <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,7 +77,8 @@
                     <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border border-green-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-green-600 uppercase tracking-wide">@trans('Completed Orders')</p>
+                                <p class="text-xs font-bold text-green-600 uppercase tracking-wide">
+                                    @trans('Completed Orders')</p>
                                 <p class="text-3xl font-bold text-green-900 mt-1">{{ $completedOrders }}</p>
                             </div>
                             <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +92,8 @@
                     <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-xl border border-yellow-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-yellow-600 uppercase tracking-wide">@trans('Pending Orders')</p>
+                                <p class="text-xs font-bold text-yellow-600 uppercase tracking-wide">
+                                    @trans('Pending Orders')</p>
                                 <p class="text-3xl font-bold text-yellow-900 mt-1">{{ $pendingOrders }}</p>
                             </div>
                             <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +107,8 @@
                     <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border border-purple-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-purple-600 uppercase tracking-wide">@trans('Total Sales')</p>
+                                <p class="text-xs font-bold text-purple-600 uppercase tracking-wide">@trans('Total Sales')
+                                </p>
                                 <p class="text-3xl font-bold text-purple-900 mt-1">${{ number_format($totalSales, 2) }}</p>
                             </div>
                             <svg class="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,7 +123,8 @@
                     <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-5 rounded-xl border border-emerald-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-emerald-600 uppercase tracking-wide">@trans('Platform Revenue')</p>
+                                <p class="text-xs font-bold text-emerald-600 uppercase tracking-wide">
+                                    @trans('Platform Revenue')</p>
                                 <p class="text-3xl font-bold text-emerald-900 mt-1">${{ number_format($totalRevenue, 2) }}
                                 </p>
                             </div>
@@ -136,7 +140,8 @@
                     <div class="bg-gradient-to-br from-stone-50 to-stone-100 p-5 rounded-xl border border-stone-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-stone-600 uppercase tracking-wide">@trans('Seller Earnings')</p>
+                                <p class="text-xs font-bold text-stone-600 uppercase tracking-wide">
+                                    @trans('Seller Earnings')</p>
                                 <p class="text-3xl font-bold text-stone-900 mt-1">
                                     ${{ number_format($totalSales - $totalRevenue, 2) }}</p>
                             </div>
@@ -152,25 +157,41 @@
 
         <!-- Products List -->
         <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 md:p-8">
-            <h2 class="text-xl font-bold text-stone-900 mb-6">Store Products ({{ $totalProducts }})</h2>
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-stone-900">Store Products ({{ $totalProducts }})</h2>
+                <a href="{{ route('admin.products.create', ['seller_id' => $seller->id]) }}"
+                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-bold transition-colors shadow-sm flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    @trans('Add Product')
+                </a>
+            </div>
 
             @if($products->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
                     @foreach($products as $product)
                         <div
-                            class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden hover:shadow-md transition-shadow">
-                            <div class="aspect-square bg-stone-200 relative">
+                            class="bg-white rounded-lg border border-stone-200 overflow-hidden hover:shadow-md transition-shadow relative group">
+                            <!-- Whole Card Link -->
+                            <a href="{{ route('buyer.products.show', $product->id) }}" class="absolute inset-0 z-10"></a>
+                            
+                            <div class="aspect-square bg-stone-100 relative">
                                 <img src="{{ $product->thumbnail ? asset('storage/' . $product->thumbnail) : 'https://placehold.co/300' }}"
                                     alt="{{ $product->name }}" class="w-full h-full object-cover">
                             </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-stone-900 mb-1">{{ $product->name }}</h3>
-                                <p class="text-xs text-stone-500 mb-2">{{ $product->type->name ?? 'Uncategorized' }}</p>
-                                <div class="flex justify-between items-center">
+                            <div class="p-2.5">
+                                <h3 class="font-semibold text-stone-900 text-sm leading-tight mb-1 line-clamp-1" title="{{ $product->name }}">{{ $product->name }}</h3>
+                                <p class="text-[10px] text-stone-500 mb-2 truncate">{{ $product->type->name ?? 'Uncategorized' }}</p>
+                                <div class="flex justify-between items-end mb-2.5">
                                     <span
-                                        class="text-lg font-bold text-emerald-600">${{ number_format($product->final_price, 2) }}</span>
-                                    <span class="text-xs text-stone-400">Base: ${{ number_format($product->price, 2) }}</span>
+                                        class="text-sm font-bold text-emerald-600">${{ number_format($product->final_price, 2) }}</span>
+                                    <span class="text-[10px] text-stone-400 line-through">${{ number_format($product->price, 2) }}</span>
                                 </div>
+                                <a href="{{ route('admin.products.edit', $product->id) }}"
+                                    class="block w-full bg-stone-50 hover:bg-stone-100 border border-stone-100 text-stone-600 hover:text-stone-900 text-center py-1.5 rounded-md font-medium transition-colors text-xs relative z-20">
+                                    @trans('Edit')
+                                </a>
                             </div>
                         </div>
                     @endforeach
