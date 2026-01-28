@@ -8,10 +8,11 @@
                 <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-500 mix-blend-multiply"></div>
             </div>
             <div class="relative max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">Welcome to Marketplace
+                <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                    {{ __('Welcome to Marketplace') }}
                 </h1>
-                <p class="mt-4 text-xl text-emerald-100 max-w-3xl">Trust-first shopping platform for Lebanon. Quality
-                    products from local artisans.</p>
+                <p class="mt-4 text-xl text-emerald-100 max-w-3xl">
+                    {{ __('Trust-first shopping platform for Lebanon. Quality products from local artisans.') }}</p>
             </div>
         </div>
 
@@ -206,7 +207,7 @@
                 @else
                     window.location.href = "{{ route('login') }}";
                 @endauth
-                                }
+                                        }
         </script>
     @endpush
 @endsection

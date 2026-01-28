@@ -1,3 +1,71 @@
+<!-- Mobile Top Header for Guests -->
+@guest
+    <div class="fixed top-0 left-0 w-full bg-gradient-to-r from-emerald-600 to-emerald-700 z-50 md:hidden shadow-lg">
+        <div class="flex items-center justify-between px-4 py-3">
+            <!-- Logo/Company Name -->
+            <a href="{{ route('buyer.home') }}" class="flex items-center gap-2">
+                @php
+                    $logoPath = \App\Models\Setting::getSetting('site_logo');
+                    $siteName = \App\Models\Setting::getSetting('site_name') ?? 'Lebanese Marketplace';
+                @endphp
+                @if($logoPath)
+                    <div class="bg-white p-2 rounded-lg shadow-md">
+                        <img src="{{ asset('storage/' . $logoPath) }}" alt="Logo" class="w-6 h-6 object-contain">
+                    </div>
+                @else
+                    <div class="bg-white p-2 rounded-lg shadow-md">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                    </div>
+                @endif
+                <div>
+                    <h1 class="text-white font-bold text-lg leading-tight">{{ $siteName }}</h1>
+                    <p class="text-emerald-100 text-xs">Guest</p>
+                </div>
+            </a>
+
+            <!-- Language Switcher -->
+            <div x-data="{ open: false }" class="relative mr-4 ml-auto">
+                <button @click="open = !open"
+                    class="flex items-center gap-1 text-emerald-100 hover:text-white transition-colors">
+                    @php
+                        $languages = \App\Helpers\LanguageHelper::getLanguages();
+                        $currentLocale = app()->getLocale();
+                        $currentLang = $languages[$currentLocale] ?? $languages['en']; 
+                    @endphp
+                    <span class="text-lg mr-1">{{ $currentLang['flag'] }}</span>
+                    <span class="uppercase font-semibold text-sm">{{ app()->getLocale() }}</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div x-show="open" @click.away="open = false" style="display: none;"
+                    class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-stone-100 overflow-hidden z-50">
+                    @foreach($languages as $code => $detail)
+                        <a href="{{ route('lang.switch', $code) }}"
+                            class="block px-4 py-2 text-sm text-stone-600 hover:bg-emerald-50 hover:text-emerald-600 font-medium transition-colors flex items-center gap-2">
+                            <span class="text-lg">{{ $detail['flag'] }}</span>
+                            {{ $detail['name'] }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Login Button -->
+            <a href="{{ route('login') }}"
+                class="bg-white text-emerald-600 px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-emerald-50 transition-colors shadow-md">
+                Login
+            </a>
+        </div>
+    </div>
+
+    <!-- Spacer for fixed header (mobile only) -->
+    <div class="h-14 md:hidden"></div>
+@endguest
+
 @auth
     <!-- Mobile Top Header (Always Visible) -->
     <div class="fixed top-0 left-0 w-full bg-gradient-to-r from-emerald-600 to-emerald-700 z-50 md:hidden shadow-lg">
@@ -26,6 +94,33 @@
                     <p class="text-emerald-100 text-xs capitalize">{{ Auth::user()->role }}</p>
                 </div>
             </a>
+
+            <!-- Language Switcher -->
+            <div x-data="{ open: false }" class="relative mr-4 ml-auto">
+                <button @click="open = !open"
+                    class="flex items-center gap-1 text-emerald-100 hover:text-white transition-colors">
+                    @php
+                        $languages = \App\Helpers\LanguageHelper::getLanguages();
+                        $currentLocale = app()->getLocale();
+                        $currentLang = $languages[$currentLocale] ?? $languages['en']; 
+                    @endphp
+                    <span class="text-lg mr-1">{{ $currentLang['flag'] }}</span>
+                    <span class="uppercase font-semibold text-sm">{{ app()->getLocale() }}</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div x-show="open" @click.away="open = false" style="display: none;"
+                    class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-stone-100 overflow-hidden z-50">
+                    @foreach($languages as $code => $detail)
+                        <a href="{{ route('lang.switch', $code) }}"
+                            class="block px-4 py-2 text-sm text-stone-600 hover:bg-emerald-50 hover:text-emerald-600 font-medium transition-colors flex items-center gap-2">
+                            <span class="text-lg">{{ $detail['flag'] }}</span>
+                            {{ $detail['name'] }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
 
             <!-- Actions Section (Cart & Profile) -->
             <div class="flex items-center gap-3">

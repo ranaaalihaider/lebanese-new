@@ -10,6 +10,12 @@ use App\Http\Controllers\BuyerController;
 
 Route::get('/', [BuyerController::class, 'index'])->name('home');
 Route::view('/about', 'about')->name('about');
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ar', 'hy', 'fr'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
 
 
 // Auth Routes

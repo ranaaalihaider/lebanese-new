@@ -3,11 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 use App\Models\User; // Added for seller relationship
 use App\Models\ProductType; // Added for type relationship
 
 class Product extends Model
 {
+    use HasTranslations;
+
+    public $translatable = ['name', 'description'];
+
     protected $fillable = [
         'seller_id',
         'product_type_id',

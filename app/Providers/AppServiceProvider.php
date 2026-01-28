@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register Observers
+        \App\Models\Product::observe(\App\Observers\ProductObserver::class);
+
         // Share settings with all views
         view()->composer('*', function ($view) {
             $settings = \App\Models\Setting::pluck('value', 'key')->toArray();

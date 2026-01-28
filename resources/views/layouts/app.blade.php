@@ -196,6 +196,34 @@
 
             <!-- Right Side (Profile) -->
             <div class="flex items-center gap-4">
+                <!-- Language Switcher -->
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" type="button"
+                        class="flex items-center gap-1 text-emerald-100/80 hover:text-white transition-colors focus:outline-none text-sm font-semibold uppercase">
+                        @php
+                            $languages = \App\Helpers\LanguageHelper::getLanguages();
+                            $currentLocale = app()->getLocale();
+                            // Fallback if locale not found
+                            $currentLang = $languages[$currentLocale] ?? $languages['en']; 
+                        @endphp
+                        <span class="text-lg mr-1">{{ $currentLang['flag'] }}</span>
+                        <!-- Mobile view might be small, but on desktop we can show full or short. Keeping it clean. -->
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" @click.away="open = false"
+                        class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+                        style="display: none;">
+                        @foreach($languages as $code => $detail)
+                            <a href="{{ route('lang.switch', $code) }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium flex items-center gap-2">
+                                <span class="text-lg">{{ $detail['flag'] }}</span>
+                                {{ $detail['name'] }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
 
                 <!-- Cart Icon (Buyer Only) -->
                 @auth
