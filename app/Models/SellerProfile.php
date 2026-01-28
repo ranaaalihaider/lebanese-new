@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use Spatie\Translatable\HasTranslations;
 
 class SellerProfile extends Model
 {
+    use HasTranslations;
+
+    public $translatable = ['store_name', 'store_description', 'store_tagline'];
+
     protected $fillable = [
         'user_id',
         'store_type_id',

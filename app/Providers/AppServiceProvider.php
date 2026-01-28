@@ -20,7 +20,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Register Observers
-        \App\Models\Product::observe(\App\Observers\ProductObserver::class);
+        // Register AutoTranslateObserver for all translatable models
+        foreach ([
+            \App\Models\Product::class,
+            \App\Models\ProductType::class,
+            \App\Models\StoreType::class,
+            \App\Models\SellerProfile::class,
+        ] as $model) {
+            $model::observe(\App\Observers\AutoTranslateObserver::class);
+        }
 
         // Share settings with all views
         view()->composer('*', function ($view) {
