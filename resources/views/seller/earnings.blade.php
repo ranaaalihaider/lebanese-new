@@ -21,6 +21,36 @@
                     <span
                         class="text-emerald-700 text-2xl font-bold ml-2 border-l border-emerald-200 pl-4">${{ number_format($totalEarnings, 2) }}</span>
                 </div>
+
+                {{-- Request Payout Button --}}
+                @if($pendingPayouts > 0)
+                    @if($payoutRequest)
+                        <div
+                            class="bg-blue-50 border border-blue-200 px-6 py-4 rounded-xl flex items-center gap-3 shadow-sm w-full sm:w-auto">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="text-xs text-blue-600 font-medium">@trans('Request Pending')</p>
+                                <p class="text-xs text-blue-500">{{ $payoutRequest->requested_at->diffForHumans() }}</p>
+                            </div>
+                        </div>
+                    @else
+                        <form action="{{ route('seller.payout.request') }}" method="POST" class="w-full sm:w-auto">
+                            @csrf
+                            <button type="submit"
+                                class="w-full px-6 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold rounded-xl hover:from-emerald-700 hover:to-emerald-800 transition-all shadow-lg shadow-emerald-200 flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                                @trans('Request Payout')
+                            </button>
+                        </form>
+                    @endif
+                @endif
             </div>
         </div>
 
@@ -76,11 +106,13 @@
                         <div class="relative">
                             <select name="payout_status" id="payout_status" onchange="this.form.submit()"
                                 class="block w-full pl-3 pr-10 py-2 text-base border-stone-200 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm rounded-lg">
-                                <option value="all" {{ request('payout_status') == 'all' ? 'selected' : '' }}>@trans('All Statuses')
+                                <option value="all" {{ request('payout_status') == 'all' ? 'selected' : '' }}>
+                                    @trans('All Statuses')
                                 </option>
                                 <option value="pending" {{ request('payout_status') == 'pending' ? 'selected' : '' }}>Pending
                                     Payout</option>
-                                <option value="paid" {{ request('payout_status') == 'paid' ? 'selected' : '' }}>@trans('Paid')</option>
+                                <option value="paid" {{ request('payout_status') == 'paid' ? 'selected' : '' }}>@trans('Paid')
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -119,17 +151,24 @@
             <table class="min-w-full divide-y divide-stone-200">
                 <thead class="bg-stone-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Order Date')
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
+                            @trans('Order Date')
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Order #')</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Item')</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Base Amount')
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
+                            @trans('Order #')</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Item')
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Platform Fee')
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
+                            @trans('Base Amount')
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Final Amount')
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
+                            @trans('Platform Fee')
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Payout Status')
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
+                            @trans('Final Amount')
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
+                            @trans('Payout Status')
                         </th>
                     </tr>
                 </thead>
@@ -276,12 +315,14 @@
                 <!-- Payment Info -->
                 <div class="space-y-4">
                     <div>
-                        <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Payment Method')</p>
+                        <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Payment Method')
+                        </p>
                         <p id="viewMethod" class="text-stone-900 font-medium"></p>
                     </div>
 
                     <div>
-                        <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Transaction ID')</p>
+                        <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Transaction ID')
+                        </p>
                         <div class="bg-stone-50 p-2 rounded border border-stone-200">
                             <code id="viewTransactionId" class="text-sm font-mono text-stone-700"></code>
                         </div>

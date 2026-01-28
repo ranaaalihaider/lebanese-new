@@ -61,19 +61,27 @@
             </div>
         </div>
 
-        <!-- Filters Section -->
         <div class="bg-white md:rounded-2xl md:shadow-sm md:border md:border-stone-200 p-3 md:p-6 mb-3 md:mb-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                 <h2 class="hidden md:block text-xl font-bold text-stone-900">@trans('Transactions')</h2>
-                <button onclick="togglePayoutFilters()"
-                    class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full md:rounded-xl flex items-center gap-2 transition-colors text-sm font-bold">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
-                        </path>
-                    </svg>
-                    @trans('Toggle Filters')
-                </button>
+                <div class="flex gap-2">
+                    <a href="{{ route('admin.payout.requests') }}"
+                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full md:rounded-xl flex items-center gap-2 transition-colors text-sm font-bold">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                        @trans('View Requests')
+                    </a>
+                    <button onclick="togglePayoutFilters()"
+                        class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full md:rounded-xl flex items-center gap-2 transition-colors text-sm font-bold">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                            </path>
+                        </svg>
+                        @trans('Toggle Filters')
+                    </button>
+                </div>
             </div>
 
             <div id="payout-filters-container"

@@ -109,8 +109,48 @@ class SellerController extends Controller
             ->where('payout_status', 'pending')
             ->sum('seller_earning');
 
-        return view('seller.earnings', compact('orders', 'totalEarnings', 'pendingPayouts'));
+        // Check for existing payout request
+        $payoutRequest = \App\Models\PayoutRequest::where('seller_id', Auth::id())
+            ->where('status', 'pending')
+            ->first();
+
+        return view('seller.earnings', compact('orders', 'totalEarnings', 'pendingPayouts', 'payoutRequest'));
+
     }
 
+    public function requestPayout()
+    {
+        $user = Auth::user();
+
+        // Calculate pending balance
+        $pendingPayouts = Order::where('seller_id', $user->id)
+            ->where('status', 'completed')
+            ->where('payout_status', 'pending')
+            ->sum('seller_earning');
+
+        // Validate pending balance
+        if ($pendingPayouts <= 0) {
+            return back()->with('error', 'No pending balance available for payout request.');
+        }
+
+        // Check if there's already a pending request
+        $existingRequest = \App\Models\PayoutRequest::where('seller_id', $user->id)
+            ->where('status', 'pending')
+            ->first();
+
+        if ($existingRequest) {
+            return back()->with('error', 'You already have a pending payout request.');
+        }
+
+        // Create payout request
+        \App\Models\PayoutRequest::create([
+            'seller_id' => $user->id,
+            'requested_amount' => $pendingPayouts,
+            'status' => 'pending',
+            'requested_at' => now(),
+        ]);
+
+        return back()->with('success', 'Payout request submitted successfully! Admin will review it soon.');
+    }
 
 }

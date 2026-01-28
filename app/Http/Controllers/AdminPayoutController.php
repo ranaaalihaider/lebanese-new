@@ -90,4 +90,22 @@ class AdminPayoutController extends Controller
 
         return back()->with('success', 'Payout released successfully for Order #' . $order->order_number);
     }
+
+    public function viewRequests()
+    {
+        $requests = \App\Models\PayoutRequest::with(['seller.sellerProfile'])
+            ->pending()
+            ->latestFirst()
+            ->paginate(15);
+
+        // Calculate current pending balance for each seller
+        foreach ($requests as $request) {
+            $request->current_pending = Order::where('seller_id', $request->seller_id)
+                ->where('status', 'completed')
+                ->where('payout_status', 'pending')
+                ->sum('seller_earning');
+        }
+
+        return view('admin.payouts.requests', compact('requests'));
+    }
 }

@@ -73,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/payouts', [\App\Http\Controllers\AdminPayoutController::class, 'index'])->name('payouts.index');
         Route::post('/payouts/{order}/release', [\App\Http\Controllers\AdminPayoutController::class, 'payout'])->name('payouts.release');
+        Route::get('/payout-requests', [\App\Http\Controllers\AdminPayoutController::class, 'viewRequests'])->name('payout.requests');
+
 
         Route::resource('product-types', \App\Http\Controllers\ProductTypeController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('store-types', \App\Http\Controllers\StoreTypeController::class)->only(['index', 'store', 'update', 'destroy']);
@@ -86,7 +88,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/order/{order}', [SellerController::class, 'show'])->name('orders.show');
         Route::patch('/orders/{order}/status', [SellerController::class, 'updateOrderStatus'])->name('orders.update-status');
         Route::get('/earnings', [SellerController::class, 'earnings'])->name('earnings');
+        Route::post('/earnings/request-payout', [SellerController::class, 'requestPayout'])->name('payout.request');
         Route::patch('/products/{product}/toggle-status', [\App\Http\Controllers\ProductController::class, 'toggleStatus'])->name('products.toggle');
+
 
     });
 
