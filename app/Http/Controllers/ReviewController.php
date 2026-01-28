@@ -47,14 +47,14 @@ class ReviewController extends Controller
 
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required|string|min:10',
-            'image' => 'nullable|image|max:2048', // 2MB max
+            'comment' => 'nullable|string|max:120',
+            'image' => 'required|image|max:5120', // 5MB max, REQUIRED
+            'is_as_described' => 'required|in:0,1,on',
+            'is_packaging_good' => 'required|in:0,1,on',
+            'is_delivery_on_time' => 'required|in:0,1,on',
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('reviews', 'public');
-        }
+        $imagePath = $request->file('image')->store('reviews', 'public');
 
         Review::create([
             'user_id' => Auth::id(),
@@ -63,6 +63,9 @@ class ReviewController extends Controller
             'rating' => $request->rating,
             'comment' => $request->comment,
             'image_path' => $imagePath,
+            'is_as_described' => $request->boolean('is_as_described'),
+            'is_packaging_good' => $request->boolean('is_packaging_good'),
+            'is_delivery_on_time' => $request->boolean('is_delivery_on_time'),
         ]);
 
         return redirect()->route('buyer.orders.index')->with('success', 'Thank you for your review!');
@@ -96,13 +99,19 @@ class ReviewController extends Controller
 
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required|string|min:10',
-            'image' => 'nullable|image|max:10240', // 10MB max per .htaccess
+            'comment' => 'nullable|string|max:120',
+            'image' => 'nullable|image|max:5120',
+            'is_as_described' => 'required|in:0,1,on',
+            'is_packaging_good' => 'required|in:0,1,on',
+            'is_delivery_on_time' => 'required|in:0,1,on',
         ]);
 
         $data = [
             'rating' => $request->rating,
             'comment' => $request->comment,
+            'is_as_described' => $request->boolean('is_as_described'),
+            'is_packaging_good' => $request->boolean('is_packaging_good'),
+            'is_delivery_on_time' => $request->boolean('is_delivery_on_time'),
         ];
 
         if ($request->hasFile('image')) {

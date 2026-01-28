@@ -38,7 +38,7 @@ class BuyerController extends Controller
     {
         $seller = User::where('role', 'seller')->with('sellerProfile')->findOrFail($id);
         // Assuming products relationship exists on User model
-        $products = $seller->products()->where('is_active', true)->latest()->get();
+        $products = $seller->products()->where('is_active', true)->with('reviews')->latest()->get();
         return view('buyer.store_details', compact('seller', 'products'));
     }
 

@@ -16,6 +16,10 @@ class Review extends Model
         'rating',
         'comment',
         'image_path',
+        'is_as_described',
+        'is_packaging_good',
+        'is_delivery_on_time',
+        'is_hidden',
     ];
 
     public function user()
