@@ -94,7 +94,8 @@
                         </svg>
                     </div>
                     <div class="flex-1">
-                        <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider mb-0.5">@trans('Sold by')</p>
+                        <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider mb-0.5">@trans('Sold by')
+                        </p>
                         <p class="text-stone-900 font-bold text-base">{{ $product->seller->sellerProfile->store_name }}</p>
                     </div>
                     <a href="{{ route('buyer.stores.show', $product->seller->id) }}"
@@ -144,6 +145,28 @@
                                                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                             </svg>
                                         @endfor
+                                    </div>
+
+                                    <!-- Review Specifics Badges -->
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        @if($review->is_as_described)
+                                            <span
+                                                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                                🛍️ @trans('As described')
+                                            </span>
+                                        @endif
+                                        @if($review->is_packaging_good)
+                                            <span
+                                                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-stone-100 text-stone-700 border border-stone-200">
+                                                📦 @trans('Good packaging')
+                                            </span>
+                                        @endif
+                                        @if($review->is_delivery_on_time)
+                                            <span
+                                                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                                                🚚 @trans('On time')
+                                            </span>
+                                        @endif
                                     </div>
 
                                     @if($review->comment)
@@ -199,7 +222,8 @@
                             </a>
                         @endauth
 
-                        <p class="text-center text-xs text-stone-400 mt-3 font-medium">@trans('Secure checkout via Lebanese Marketplace.')
+                        <p class="text-center text-xs text-stone-400 mt-3 font-medium">
+                            @trans('Secure checkout via Lebanese Marketplace.')
                         </p>
                     </div>
                 @else
