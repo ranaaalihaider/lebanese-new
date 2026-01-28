@@ -7,14 +7,14 @@
             <div class="max-w-7xl mx-auto px-4 py-4 md:py-6">
                 <!-- Mobile Header (WhatsApp Style) -->
                 <div class="md:hidden">
-                    <h1 class="text-xl font-bold text-white">Sellers</h1>
+                    <h1 class="text-xl font-bold text-white">@trans('Sellers')</h1>
                     <p class="text-emerald-100 text-sm mt-0.5">{{ $sellers->total() }} sellers</p>
                 </div>
 
                 <!-- Desktop Header -->
                 <div class="hidden md:block">
-                    <h1 class="text-2xl md:text-3xl font-bold text-white">Seller Management</h1>
-                    <p class="text-emerald-50 text-sm md:text-base mt-1">Manage seller accounts and approvals</p>
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">@trans('Seller Management')</h1>
+                    <p class="text-emerald-50 text-sm md:text-base mt-1">@trans('Manage seller accounts and approvals')</p>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <!-- Search Bar (WhatsApp Style for Mobile) -->
             <div class="bg-white md:rounded-2xl md:shadow-sm md:border md:border-stone-200 p-3 md:p-6 mb-3 md:mb-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="hidden md:block text-lg font-bold text-stone-900">Filters</h2>
+                    <h2 class="hidden md:block text-lg font-bold text-stone-900">@trans('Filters')</h2>
                     <button type="button" onclick="toggleSellerFilters()"
                         class="hidden md:flex px-4 py-2 bg-stone-100 text-stone-600 rounded-xl items-center gap-2 hover:bg-stone-200 transition-colors text-sm font-bold">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,7 +31,7 @@
                                 d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
                             </path>
                         </svg>
-                        Toggle Filters
+                        @trans('Toggle Filters')
                     </button>
                 </div>
                 <div id="seller-filters-container" class="{{ request()->anyFilled(['search', 'status']) ? '' : 'hidden' }}">
@@ -51,11 +51,11 @@
                         <div class="md:w-48">
                             <select name="status"
                                 class="w-full px-3 py-2.5 border border-stone-300 rounded-full md:rounded-xl focus:ring-2 focus:ring-emerald-500 bg-white">
-                                <option value="">All Status</option>
-                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending
+                                <option value="">@trans('All Status')</option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>@trans('Pending')
                                 </option>
-                                <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Rejected
+                                <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>@trans('Active')</option>
+                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>@trans('Rejected')
                                 </option>
                             </select>
                         </div>
@@ -63,12 +63,12 @@
                         <!-- Buttons -->
                         <button type="submit"
                             class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-full md:rounded-xl font-bold transition-colors">
-                            Apply
+                            @trans('Apply')
                         </button>
                         @if(request('search') || request('status'))
                             <a href="{{ route('admin.sellers') }}"
                                 class="bg-stone-200 hover:bg-stone-300 text-stone-700 px-4 py-2.5 rounded-full md:rounded-xl font-bold transition-colors text-center">
-                                Clear
+                                @trans('Clear')
                             </a>
                         @endif
 
@@ -153,15 +153,15 @@
                             <thead class="bg-stone-50">
                                 <tr>
                                     <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
-                                        Seller</th>
+                                        @trans('Seller')</th>
                                     <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">
-                                        Contact</th>
+                                        @trans('Contact')</th>
                                     <th class="px-6 py-4 text-center text-xs font-bold text-stone-500 uppercase tracking-wider">
-                                        Products</th>
+                                        @trans('Products')</th>
                                     <th class="px-6 py-4 text-center text-xs font-bold text-stone-500 uppercase tracking-wider">
-                                        Status</th>
+                                        @trans('Status')</th>
                                     <th class="px-6 py-4 text-right text-xs font-bold text-stone-500 uppercase tracking-wider">
-                                        Actions</th>
+                                        @trans('Actions')</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-stone-200">
@@ -205,7 +205,7 @@
                                             <div class="flex items-center justify-end gap-2">
                                                 <a href="{{ route('admin.stores.show', $seller->id) }}"
                                                     class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                    View Store
+                                                    @trans('View Store')
                                                 </a>
 
                                                 @if($seller->status === 'pending')
@@ -215,7 +215,7 @@
                                                         @csrf
                                                         <button type="submit"
                                                             class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                            Approve
+                                                            @trans('Approve')
                                                         </button>
                                                     </form>
                                                     <form method="POST" action="{{ route('admin.sellers.reject', $seller->id) }}"
@@ -223,7 +223,7 @@
                                                         @csrf
                                                         <button type="submit"
                                                             class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                            Reject
+                                                            @trans('Reject')
                                                         </button>
                                                     </form>
                                                 @elseif($seller->status === 'active')
@@ -233,7 +233,7 @@
                                                         @csrf
                                                         <button type="submit"
                                                             class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                            Deactivate
+                                                            @trans('Deactivate')
                                                         </button>
                                                     </form>
                                                 @elseif($seller->status === 'rejected')
@@ -243,7 +243,7 @@
                                                         @csrf
                                                         <button type="submit"
                                                             class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-colors">
-                                                            Activate
+                                                            @trans('Activate')
                                                         </button>
                                                     </form>
                                                 @endif
@@ -267,8 +267,8 @@
                             d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
                         </path>
                     </svg>
-                    <h3 class="text-lg font-bold text-stone-900">No sellers found</h3>
-                    <p class="text-stone-500 mt-1">Try adjusting your search or filters</p>
+                    <h3 class="text-lg font-bold text-stone-900">@trans('No sellers found')</h3>
+                    <p class="text-stone-500 mt-1">@trans('Try adjusting your search or filters')</p>
                 </div>
             @endif
         </div>

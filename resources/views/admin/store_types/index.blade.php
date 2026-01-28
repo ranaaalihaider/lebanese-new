@@ -3,20 +3,20 @@
 @section('content')
     <div class="p-6">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold">Manage Store Types</h1>
-            <a href="{{ route('admin.dashboard') }}" class="text-blue-500 hover:text-blue-700">&larr; Dashboard</a>
+            <h1 class="text-3xl font-bold">@trans('Manage Store Types')</h1>
+            <a href="{{ route('admin.dashboard') }}" class="text-blue-500 hover:text-blue-700">@trans('&larr; Dashboard')</a>
         </div>
 
         <!-- Add New Type -->
         <div class="bg-white rounded-lg shadow p-6 mb-6">
-            <h2 class="text-xl font-bold mb-4">Add New Store Type</h2>
+            <h2 class="text-xl font-bold mb-4">@trans('Add New Store Type')</h2>
             <form action="{{ route('admin.store-types.store') }}" method="POST" class="flex gap-4">
                 @csrf
                 <input type="text" name="name"
                     class="shadow appearance-none border rounded flex-grow py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="e.g., Beekeeper, Farmer, Bakery" required>
                 <button type="submit"
-                    class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Add</button>
+                    class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">@trans('Add')</button>
             </form>
         </div>
 
@@ -27,11 +27,11 @@
                     <tr>
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Name
+                            @trans('Name')
                         </th>
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Actions
+                            @trans('Actions')
                         </th>
                     </tr>
                 </thead>
@@ -52,7 +52,7 @@
                                     <!-- Edit/Save Button -->
                                     <div x-show="!editing">
                                         <button @click="editing = true" class="text-blue-500 hover:text-blue-700 font-bold">
-                                            Edit
+                                            @trans('Edit')
                                         </button>
                                     </div>
                                     <div x-show="editing">
@@ -62,12 +62,12 @@
                                             @method('PUT')
                                             <input type="hidden" name="name" :value="name">
                                             <button type="submit" class="text-green-500 hover:text-green-700 font-bold">
-                                                Save
+                                                @trans('Save')
                                             </button>
                                         </form>
                                         <button @click="editing = false; name = '{{ $type->name }}'"
                                             class="text-gray-500 hover:text-gray-700 font-bold ml-2">
-                                            Cancel
+                                            @trans('Cancel')
                                         </button>
                                     </div>
 
@@ -76,7 +76,7 @@
                                         onsubmit="return confirm('Delete this type?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:text-red-700 font-bold">Delete</button>
+                                        <button type="submit" class="text-red-500 hover:text-red-700 font-bold">@trans('Delete')</button>
                                     </form>
                                 </div>
                             </td>

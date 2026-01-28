@@ -4,8 +4,8 @@
     <div class="p-6">
         <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
             <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold">Edit Seller Details</h1>
-                <a href="{{ route('admin.sellers') }}" class="text-gray-500 hover:text-gray-700">&times; Cancel</a>
+                <h1 class="text-2xl font-bold">@trans('Edit Seller Details')</h1>
+                <a href="{{ route('admin.sellers') }}" class="text-gray-500 hover:text-gray-700">@trans('&times; Cancel')</a>
             </div>
 
             <form action="{{ route('admin.sellers.update', $seller->id) }}" method="POST">
@@ -14,16 +14,16 @@
 
                 <!-- Personal Info -->
                 <div class="mb-6 border-b pb-4">
-                    <h2 class="text-lg font-semibold mb-4 text-gray-700">Personal Information</h2>
+                    <h2 class="text-lg font-semibold mb-4 text-gray-700">@trans('Personal Information')</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">@trans('Full Name')</label>
                             <input type="text" name="name" value="{{ $seller->name }}"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
                         </div>
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">@trans('Phone')</label>
                             <input type="text" name="phone" value="{{ $seller->phone }}"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
@@ -33,16 +33,16 @@
 
                 <!-- Store Info -->
                 <div>
-                    <h2 class="text-lg font-semibold mb-4 text-gray-700">Store Details</h2>
+                    <h2 class="text-lg font-semibold mb-4 text-gray-700">@trans('Store Details')</h2>
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Store Name</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">@trans('Store Name')</label>
                         <input type="text" name="store_name" value="{{ $seller->sellerProfile->store_name }}"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required>
                     </div>
 
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Store Tagline</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">@trans('Store Tagline')</label>
                         <input type="text" name="store_tagline" value="{{ $seller->sellerProfile->store_tagline }}"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="e.g. Best Burgers in Town">
@@ -50,7 +50,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Category</label>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">@trans('Category')</label>
                             <select name="store_type_id"
                                 class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
@@ -61,14 +61,14 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Language Preference</label>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">@trans('Language Preference')</label>
                             <select name="language_preference"
                                 class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
-                                <option value="EN" {{ $seller->sellerProfile->language_preference == 'EN' ? 'selected' : '' }}>English</option>
-                                <option value="AR" {{ $seller->sellerProfile->language_preference == 'AR' ? 'selected' : '' }}>Arabic</option>
-                                <option value="HY" {{ $seller->sellerProfile->language_preference == 'HY' ? 'selected' : '' }}>Armenian</option>
-                                <option value="FR" {{ $seller->sellerProfile->language_preference == 'FR' ? 'selected' : '' }}>French</option>
+                                <option value="EN" {{ $seller->sellerProfile->language_preference == 'EN' ? 'selected' : '' }}>@trans('English')</option>
+                                <option value="AR" {{ $seller->sellerProfile->language_preference == 'AR' ? 'selected' : '' }}>@trans('Arabic')</option>
+                                <option value="HY" {{ $seller->sellerProfile->language_preference == 'HY' ? 'selected' : '' }}>@trans('Armenian')</option>
+                                <option value="FR" {{ $seller->sellerProfile->language_preference == 'FR' ? 'selected' : '' }}>@trans('French')</option>
                             </select>
                         </div>
                     </div>
@@ -82,13 +82,13 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Latitude</label>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">@trans('Latitude')</label>
                             <input type="text" name="latitude" value="{{ $seller->sellerProfile->latitude }}"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
                         </div>
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Longitude</label>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">@trans('Longitude')</label>
                             <input type="text" name="longitude" value="{{ $seller->sellerProfile->longitude }}"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>

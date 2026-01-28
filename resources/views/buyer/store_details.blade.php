@@ -20,7 +20,7 @@
                     <p class="mt-1 text-lg font-bold text-emerald-700">${{ number_format($product->final_price, 2) }}</p>
                 </a>
             @empty
-                <p class="col-span-full text-center text-gray-500 py-10">No products found in this store.</p>
+                <p class="col-span-full text-center text-gray-500 py-10">@trans('No products found in this store.')</p>
             @endforelse
         </div>
     </div>

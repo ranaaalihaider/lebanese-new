@@ -5,7 +5,7 @@
         <!-- Header with collapsible filter toggle -->
         <div class="flex flex-col gap-4 mb-6">
             <div class="flex items-center justify-between">
-                <h1 class="text-2xl md:text-3xl font-bold text-stone-900">All Orders</h1>
+                <h1 class="text-2xl md:text-3xl font-bold text-stone-900">@trans('All Orders')</h1>
                 <button onclick="toggleFilters()"
                     class="px-4 py-2 bg-emerald-600 text-white rounded-xl flex items-center gap-2 hover:bg-emerald-700 transition-colors shadow-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -13,7 +13,7 @@
                             d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
                         </path>
                     </svg>
-                    Filters
+                    @trans('Filters')
                 </button>
             </div>
 
@@ -24,7 +24,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <!-- Search -->
                             <div class="lg:col-span-1">
-                                <label for="order_number" class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">Search</label>
+                                <label for="order_number" class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Search')</label>
                                 <input type="text" name="order_number" value="{{ request('order_number') }}"
                                     placeholder="Order ID..."
                                     class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm">
@@ -32,24 +32,24 @@
 
                             <!-- Status -->
                             <div>
-                                <label for="status" class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">Status</label>
+                                <label for="status" class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Status')</label>
                                 <select name="status"
                                     class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm">
-                                    <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>All Status</option>
-                                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="accepted" {{ request('status') == 'accepted' ? 'selected' : '' }}>Accepted</option>
-                                    <option value="handed_to_courier" {{ request('status') == 'handed_to_courier' ? 'selected' : '' }}>With Courier</option>
-                                    <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                    <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>@trans('All Status')</option>
+                                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>@trans('Pending')</option>
+                                    <option value="accepted" {{ request('status') == 'accepted' ? 'selected' : '' }}>@trans('Accepted')</option>
+                                    <option value="handed_to_courier" {{ request('status') == 'handed_to_courier' ? 'selected' : '' }}>@trans('With Courier')</option>
+                                    <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>@trans('Completed')</option>
+                                    <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>@trans('Rejected')</option>
                                 </select>
                             </div>
 
                             <!-- Store -->
                             <div>
-                                <label for="store_id" class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">Store</label>
+                                <label for="store_id" class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Store')</label>
                                 <select name="store_id" id="store-select"
                                     class="searchable-select w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm">
-                                    <option value="all">All Stores</option>
+                                    <option value="all">@trans('All Stores')</option>
                                     @foreach($sellers as $seller)
                                         <option value="{{ $seller->id }}" {{ request('store_id') == $seller->id ? 'selected' : '' }}>
                                             {{ $seller->sellerProfile->store_name ?? $seller->name }}
@@ -60,10 +60,10 @@
 
                             <!-- Buyer -->
                             <div>
-                                <label for="buyer_id" class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">Customer</label>
+                                <label for="buyer_id" class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Customer')</label>
                                 <select name="buyer_id" id="buyer-select"
                                     class="searchable-select w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm">
-                                    <option value="all">All Customers</option>
+                                    <option value="all">@trans('All Customers')</option>
                                     @foreach($buyers as $buyer)
                                         <option value="{{ $buyer->id }}" {{ request('buyer_id') == $buyer->id ? 'selected' : '' }}>
                                             {{ $buyer->name }}
@@ -74,7 +74,7 @@
 
                             <!-- Date Range -->
                             <div class="lg:col-span-2">
-                                <label class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">Date Range</label>
+                                <label class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Date Range')</label>
                                 <div class="grid grid-cols-2 gap-2">
                                     <input type="date" name="start_date" value="{{ request('start_date') }}" 
                                         class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm text-stone-600"
@@ -92,12 +92,12 @@
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
-                                    Apply Filters
+                                    @trans('Apply Filters')
                                 </button>
                                 @if(request()->anyFilled(['order_number', 'status', 'store_id', 'buyer_id', 'start_date', 'end_date']) && (request('status') != 'all' || request('store_id') != 'all' || request('buyer_id') != 'all'))
                                     <a href="{{ route('admin.orders.index') }}" 
                                        class="px-4 py-2 bg-stone-100 text-stone-600 font-bold rounded-xl hover:bg-stone-200 transition-colors shadow-sm text-center">
-                                        Reset
+                                        @trans('Reset')
                                     </a>
                                 @endif
                             </div>
@@ -157,7 +157,7 @@
                             {{ substr($order->buyer->name, 0, 1) }}
                         </div>
                         <div class="flex-1">
-                            <p class="text-xs text-stone-500 uppercase tracking-wide">Buyer</p>
+                            <p class="text-xs text-stone-500 uppercase tracking-wide">@trans('Buyer')</p>
                             <p class="text-sm font-medium text-stone-900">{{ $order->buyer->name }}</p>
                         </div>
                     </div>
@@ -165,22 +165,22 @@
                     <!-- Store and Total -->
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <p class="text-xs text-stone-500 uppercase tracking-wide mb-1">Store</p>
+                            <p class="text-xs text-stone-500 uppercase tracking-wide mb-1">@trans('Store')</p>
                             <p class="text-sm font-medium text-stone-900">
                                 {{ $order->seller->sellerProfile->store_name ?? $order->seller->name }}
                             </p>
                         </div>
                         <div>
-                            <p class="text-xs text-stone-500 uppercase tracking-wide mb-1">Price Details</p>
-                            <div class="text-xs text-stone-500 flex justify-between"><span>Base:</span>
+                            <p class="text-xs text-stone-500 uppercase tracking-wide mb-1">@trans('Price Details')</p>
+                            <div class="text-xs text-stone-500 flex justify-between"><span>@trans('Base:')</span>
                                 <span>${{ number_format($order->product->price * $order->quantity, 2) }}</span>
                             </div>
-                            <div class="text-xs text-stone-400 flex justify-between"><span>Fee:</span>
+                            <div class="text-xs text-stone-400 flex justify-between"><span>@trans('Fee:')</span>
                                 <span>${{ number_format($order->platform_fee, 2) }}</span>
                             </div>
                             <div
                                 class="text-sm font-bold text-emerald-600 flex justify-between border-t border-stone-100 mt-1 pt-1">
-                                <span>Final:</span> <span>${{ number_format($order->total_price, 2) }}</span>
+                                <span>@trans('Final:')</span> <span>${{ number_format($order->total_price, 2) }}</span>
                             </div>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
                         </path>
                     </svg>
-                    <p class="text-stone-500">No orders found matching your criteria.</p>
+                    <p class="text-stone-500">@trans('No orders found matching your criteria.')</p>
                 </div>
             @endforelse
         </div>
@@ -208,17 +208,17 @@
                 <table class="min-w-full divide-y divide-stone-100">
                     <thead class="bg-stone-50">
                         <tr>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Order
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Order')
                             </th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Buyer
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Buyer')
                             </th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Store
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Store')
                             </th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Bill
                                 Total</th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Status
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Status')
                             </th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Placed
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Placed')
                             </th>
                         </tr>
                     </thead>
@@ -229,7 +229,7 @@
                                     <a href="{{ route('admin.orders.show', $order) }}" class="group flex flex-col">
                                         <span
                                             class="font-bold text-emerald-600 group-hover:text-emerald-700 transition-colors">#{{ $order->order_number }}</span>
-                                        <span class="text-xs text-stone-400">View Details</span>
+                                        <span class="text-xs text-stone-400">@trans('View Details')</span>
                                     </a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -284,7 +284,7 @@
                                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
                                             </path>
                                         </svg>
-                                        <p>No orders found matching your criteria.</p>
+                                        <p>@trans('No orders found matching your criteria.')</p>
                                     </div>
                                 </td>
                             </tr>

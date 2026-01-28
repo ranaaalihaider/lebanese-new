@@ -19,10 +19,10 @@
         <!-- Featured Products -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold tracking-tight text-gray-900">Featured Products</h2>
+                <h2 class="text-2xl font-bold tracking-tight text-gray-900">@trans('Featured Products')</h2>
                 <a href="{{ route('buyer.stores') }}"
                     class="text-emerald-600 hover:text-emerald-700 font-medium flex items-center">
-                    See All <span aria-hidden="true" class="ml-1">&rarr;</span>
+                    @trans('See All') <span aria-hidden="true" class="ml-1">@trans('&rarr;')</span>
                 </a>
             </div>
 
@@ -33,11 +33,11 @@
                         <!-- Badge (Randomized for visual variety like mockup) -->
                         <div class="absolute top-3 right-3 z-10">
                             @if($index % 4 == 0)
-                                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Popular</span>
+                                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">@trans('Popular')</span>
                             @elseif($index % 4 == 1)
-                                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Best Seller</span>
+                                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">@trans('Best Seller')</span>
                             @elseif($index % 4 == 2)
-                                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">New</span>
+                                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">@trans('New')</span>
                             @endif
                         </div>
 
@@ -88,7 +88,7 @@
                                     {{ $product->seller->sellerProfile->store_name ?? $product->seller->name }}
                                 </p>
 
-                                <div class="mt-2 text-xs text-stone-500">Final Price</div>
+                                <div class="mt-2 text-xs text-stone-500">@trans('Final Price')</div>
                                 <div class="flex items-baseline gap-1">
                                     <span
                                         class="text-lg font-bold text-emerald-600">{{ number_format($product->final_price, 0) }}
@@ -109,7 +109,7 @@
                                         </div>
                                         <span class="ml-1 text-xs text-gray-400">({{ $product->review_count }})</span>
                                     @else
-                                        <span class="text-xs text-gray-400">No reviews yet</span>
+                                        <span class="text-xs text-gray-400">@trans('No reviews yet')</span>
                                     @endif
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                             <div class="mt-4 flex gap-2 relative z-20">
                                 <a href="{{ route('buyer.products.show', $product) }}"
                                     class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold py-2 rounded-lg text-center transition-colors">
-                                    View Details
+                                    @trans('View Details')
                                 </a>
                                 <form action="{{ route('buyer.cart.store') }}" method="POST">
                                     @csrf
@@ -145,13 +145,13 @@
                 <div class="flex items-start gap-3">
                     <div class="flex-shrink-0 text-3xl">🛍️</div>
                     <div class="flex-1">
-                        <h4 class="text-sm font-bold text-gray-900">Install App</h4>
-                        <p class="text-xs text-gray-500 mt-1">Add to home screen for a native app experience</p>
+                        <h4 class="text-sm font-bold text-gray-900">@trans('Install App')</h4>
+                        <p class="text-xs text-gray-500 mt-1">@trans('Add to home screen for a native app experience')</p>
                         <div class="mt-3 flex gap-2">
                             <button
-                                class="bg-emerald-600 text-white text-xs font-semibold px-3 py-1.5 rounded hover:bg-emerald-700">Install</button>
+                                class="bg-emerald-600 text-white text-xs font-semibold px-3 py-1.5 rounded hover:bg-emerald-700">@trans('Install')</button>
                             <button @click="show = false"
-                                class="bg-gray-100 text-gray-600 text-xs font-semibold px-3 py-1.5 rounded hover:bg-gray-200">Later</button>
+                                class="bg-gray-100 text-gray-600 text-xs font-semibold px-3 py-1.5 rounded hover:bg-gray-200">@trans('Later')</button>
                         </div>
                     </div>
                 </div>

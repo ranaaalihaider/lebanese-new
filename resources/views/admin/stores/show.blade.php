@@ -8,7 +8,7 @@
             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
-            Back to Sellers
+            @trans('Back to Sellers')
         </a>
 
         <!-- Store Header -->
@@ -21,9 +21,9 @@
                         <p class="text-stone-500 mt-1">{{ $seller->sellerProfile->store_tagline }}</p>
                     @endif
                     <div class="flex gap-4 text-sm text-stone-500 mt-2">
-                        <p>Owner: <span class="font-bold text-stone-700">{{ $seller->name }}</span></p>
+                        <p>@trans('Owner:') <span class="font-bold text-stone-700">{{ $seller->name }}</span></p>
                         <p>•</p>
-                        <p>Phone: <a href="tel:{{ $seller->phone }}"
+                        <p>@trans('Phone:') <a href="tel:{{ $seller->phone }}"
                                 class="text-emerald-600 hover:underline font-bold">{{ $seller->phone }}</a></p>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <!-- Action Button -->
                 <a href="{{ route('admin.sellers.edit', $seller->id) }}"
                     class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm">
-                    Edit Seller Account
+                    @trans('Edit Seller Account')
                 </a>
             </div>
         </div>
@@ -46,7 +46,7 @@
                             d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
                         </path>
                     </svg>
-                    <h2 class="text-xl font-bold text-stone-900">Store Analytics</h2>
+                    <h2 class="text-xl font-bold text-stone-900">@trans('Store Analytics')</h2>
                 </div>
                 <svg x-show="!open" class="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -63,7 +63,7 @@
                     <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border border-blue-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-blue-600 uppercase tracking-wide">Total Products</p>
+                                <p class="text-xs font-bold text-blue-600 uppercase tracking-wide">@trans('Total Products')</p>
                                 <p class="text-3xl font-bold text-blue-900 mt-1">{{ $totalProducts }}</p>
                             </div>
                             <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,7 +77,7 @@
                     <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border border-green-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-green-600 uppercase tracking-wide">Completed Orders</p>
+                                <p class="text-xs font-bold text-green-600 uppercase tracking-wide">@trans('Completed Orders')</p>
                                 <p class="text-3xl font-bold text-green-900 mt-1">{{ $completedOrders }}</p>
                             </div>
                             <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +91,7 @@
                     <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-xl border border-yellow-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-yellow-600 uppercase tracking-wide">Pending Orders</p>
+                                <p class="text-xs font-bold text-yellow-600 uppercase tracking-wide">@trans('Pending Orders')</p>
                                 <p class="text-3xl font-bold text-yellow-900 mt-1">{{ $pendingOrders }}</p>
                             </div>
                             <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +105,7 @@
                     <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border border-purple-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-purple-600 uppercase tracking-wide">Total Sales</p>
+                                <p class="text-xs font-bold text-purple-600 uppercase tracking-wide">@trans('Total Sales')</p>
                                 <p class="text-3xl font-bold text-purple-900 mt-1">${{ number_format($totalSales, 2) }}</p>
                             </div>
                             <svg class="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,7 +120,7 @@
                     <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-5 rounded-xl border border-emerald-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-emerald-600 uppercase tracking-wide">Platform Revenue</p>
+                                <p class="text-xs font-bold text-emerald-600 uppercase tracking-wide">@trans('Platform Revenue')</p>
                                 <p class="text-3xl font-bold text-emerald-900 mt-1">${{ number_format($totalRevenue, 2) }}
                                 </p>
                             </div>
@@ -136,7 +136,7 @@
                     <div class="bg-gradient-to-br from-stone-50 to-stone-100 p-5 rounded-xl border border-stone-200">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-stone-600 uppercase tracking-wide">Seller Earnings</p>
+                                <p class="text-xs font-bold text-stone-600 uppercase tracking-wide">@trans('Seller Earnings')</p>
                                 <p class="text-3xl font-bold text-stone-900 mt-1">
                                     ${{ number_format($totalSales - $totalRevenue, 2) }}</p>
                             </div>
@@ -181,7 +181,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                     </svg>
-                    <p class="text-stone-500">No products listed yet</p>
+                    <p class="text-stone-500">@trans('No products listed yet')</p>
                 </div>
             @endif
         </div>

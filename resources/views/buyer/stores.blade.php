@@ -12,7 +12,7 @@
                     </path>
                 </svg>
             </a>
-            <h1 class="text-lg font-bold text-stone-900 tracking-tight">All Stores</h1>
+            <h1 class="text-lg font-bold text-stone-900 tracking-tight">{{ __('All Stores') }}</h1>
         </div>
     </header>
 
@@ -38,9 +38,9 @@
                                 class="text-base md:text-lg font-bold text-stone-900 truncate group-hover:text-emerald-700 transition-colors">
                                 {{ $seller->sellerProfile->store_name }}</h2>
                             <p class="text-xs md:text-sm text-stone-500 truncate mb-2 font-medium">
-                                {{ $seller->sellerProfile->storeType->name ?? 'General Store' }}</p>
+                                {{ $seller->sellerProfile->storeType->name ?? __('General Store') }}</p>
                             <div class="flex items-center gap-2">
-                                <span class="text-xs text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100/50">Verified</span>
+                                <span class="text-xs text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100/50">{{ __('Verified') }}</span>
                             </div>
                         </div>
                         <div
@@ -60,8 +60,8 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-base font-bold text-stone-700 mb-1">No Stores Found</h3>
-                    <p class="text-sm text-stone-400">Check back later for new sellers.</p>
+                    <h3 class="text-base font-bold text-stone-700 mb-1">{{ __('No Stores Found') }}</h3>
+                    <p class="text-sm text-stone-400">{{ __('Check back later for new sellers.') }}</p>
                 </div>
             @endforelse
         </div>

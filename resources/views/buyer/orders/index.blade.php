@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-bold text-stone-800 mb-6">My Orders</h1>
+        <h1 class="text-2xl font-bold text-stone-800 mb-6">@trans('My Orders')</h1>
 
         @if($orders->count() > 0)
             <div class="bg-white shadow overflow-hidden sm:rounded-md">
@@ -22,12 +22,12 @@
                                                 @if(!$order->review)
                                                     <a href="{{ route('buyer.reviews.create', $order) }}"
                                                         class="px-3 py-1 text-xs font-bold text-white bg-emerald-600 rounded-full hover:bg-emerald-700 shadow-sm transition-colors">
-                                                        Write Review
+                                                        @trans('Write Review')
                                                     </a>
                                                 @else
                                                     <a href="{{ route('buyer.reviews.edit', $order->review) }}"
                                                         class="px-3 py-1 text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full hover:bg-emerald-100 transition-colors">
-                                                        Edit Review
+                                                        @trans('Edit Review')
                                                     </a>
                                                 @endif
                                             @endif
@@ -78,7 +78,7 @@
             </div>
         @else
             <div class="bg-white shadow overflow-hidden sm:rounded-lg p-6 text-center">
-                <p class="text-gray-500">You haven't placed any orders yet.</p>
+                <p class="text-gray-500">@trans('You haven\'t placed any orders yet.')</p>
                 <a href="{{ route('buyer.stores') }}" class="mt-4 inline-block text-emerald-600 hover:text-emerald-500">Browse
                     Stores &rarr;</a>
             </div>

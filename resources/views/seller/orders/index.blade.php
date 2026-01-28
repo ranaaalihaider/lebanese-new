@@ -3,30 +3,30 @@
 @section('content')
 <div class="p-4 md:p-6 pb-24 md:pb-6"> {{-- Added padding-bottom for mobile nav --}}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-        <h1 class="text-2xl font-bold text-stone-900">Orders Management</h1>
+        <h1 class="text-2xl font-bold text-stone-900">@trans('Orders Management')</h1>
         
         {{-- Mobile Scrollable Tabs --}}
         <div class="w-full md:w-auto overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 scrollbar-hide">
             <div class="flex gap-2 min-w-max">
                 <a href="{{ route('seller.orders.index') }}" 
                    class="px-4 py-2 rounded-full text-sm font-bold transition-colors {{ $status == 'all' ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-stone-600 border border-stone-200' }}">
-                   All
+                   @trans('All')
                 </a>
                 <a href="{{ route('seller.orders.index', ['status' => 'pending']) }}" 
                    class="px-4 py-2 rounded-full text-sm font-bold transition-colors {{ $status == 'pending' ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-stone-600 border border-stone-200' }}">
-                   Pending
+                   @trans('Pending')
                 </a>
                 <a href="{{ route('seller.orders.index', ['status' => 'accepted']) }}" 
                    class="px-4 py-2 rounded-full text-sm font-bold transition-colors {{ $status == 'accepted' ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-stone-600 border border-stone-200' }}">
-                   Accepted
+                   @trans('Accepted')
                 </a>
                 <a href="{{ route('seller.orders.index', ['status' => 'handed_to_courier']) }}" 
                    class="px-4 py-2 rounded-full text-sm font-bold transition-colors {{ $status == 'handed_to_courier' ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-stone-600 border border-stone-200' }}">
-                   On Way
+                   @trans('On Way')
                 </a>
                 <a href="{{ route('seller.orders.index', ['status' => 'completed']) }}" 
                    class="px-4 py-2 rounded-full text-sm font-bold transition-colors {{ $status == 'completed' ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-stone-600 border border-stone-200' }}">
-                   Completed
+                   @trans('Completed')
                 </a>
             </div>
         </div>
@@ -38,12 +38,12 @@
             <table class="min-w-full divide-y divide-stone-200">
                 <thead class="bg-stone-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Order</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Product</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Customer</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Total</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Order')</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Product')</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Customer')</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Total')</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Status')</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">@trans('Actions')</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-stone-200">
@@ -95,12 +95,12 @@
                                         <form action="{{ route('seller.orders.update-status', $order) }}" method="POST">
                                             @csrf @method('PATCH')
                                             <input type="hidden" name="status" value="accepted">
-                                            <button type="submit" class="text-green-600 hover:text-green-900 bg-green-50 px-3 py-1 rounded-md border border-green-200 hover:bg-green-100 transition-colors">Accept</button>
+                                            <button type="submit" class="text-green-600 hover:text-green-900 bg-green-50 px-3 py-1 rounded-md border border-green-200 hover:bg-green-100 transition-colors">@trans('Accept')</button>
                                         </form>
                                         <form action="{{ route('seller.orders.update-status', $order) }}" method="POST">
                                             @csrf @method('PATCH')
                                             <input type="hidden" name="status" value="rejected">
-                                            <button type="submit" class="text-red-600 hover:text-red-900 bg-red-50 px-3 py-1 rounded-md border border-red-200 hover:bg-red-100 transition-colors">Reject</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-900 bg-red-50 px-3 py-1 rounded-md border border-red-200 hover:bg-red-100 transition-colors">@trans('Reject')</button>
                                         </form>
                                     @endif
 
@@ -108,7 +108,7 @@
                                         <form action="{{ route('seller.orders.update-status', $order) }}" method="POST">
                                             @csrf @method('PATCH')
                                             <input type="hidden" name="status" value="handed_to_courier">
-                                            <button type="submit" class="text-purple-600 hover:text-purple-900 bg-purple-50 px-3 py-1 rounded-md border border-purple-200 hover:bg-purple-100 transition-colors">Courier</button>
+                                            <button type="submit" class="text-purple-600 hover:text-purple-900 bg-purple-50 px-3 py-1 rounded-md border border-purple-200 hover:bg-purple-100 transition-colors">@trans('Courier')</button>
                                         </form>
                                     @endif
                                     
@@ -116,7 +116,7 @@
                                         <form action="{{ route('seller.orders.update-status', $order) }}" method="POST">
                                             @csrf @method('PATCH')
                                             <input type="hidden" name="status" value="completed">
-                                            <button type="submit" class="text-emerald-600 hover:text-emerald-900 bg-emerald-50 px-3 py-1 rounded-md border border-emerald-200 hover:bg-emerald-100 transition-colors">Mark Completed</button>
+                                            <button type="submit" class="text-emerald-600 hover:text-emerald-900 bg-emerald-50 px-3 py-1 rounded-md border border-emerald-200 hover:bg-emerald-100 transition-colors">@trans('Mark Completed')</button>
                                         </form>
                                     @endif
                                 </div>
@@ -175,27 +175,27 @@
                             <form action="{{ route('seller.orders.update-status', $order) }}" method="POST" class="flex-1">
                                 @csrf @method('PATCH')
                                 <input type="hidden" name="status" value="accepted">
-                                <button type="submit" class="w-full text-center text-sm font-bold text-green-700 bg-green-50 py-2 rounded-lg active:bg-green-100">Accept</button>
+                                <button type="submit" class="w-full text-center text-sm font-bold text-green-700 bg-green-50 py-2 rounded-lg active:bg-green-100">@trans('Accept')</button>
                             </form>
                             <form action="{{ route('seller.orders.update-status', $order) }}" method="POST" class="flex-1">
                                 @csrf @method('PATCH')
                                 <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="w-full text-center text-sm font-bold text-red-700 bg-red-50 py-2 rounded-lg active:bg-red-100">Reject</button>
+                                <button type="submit" class="w-full text-center text-sm font-bold text-red-700 bg-red-50 py-2 rounded-lg active:bg-red-100">@trans('Reject')</button>
                             </form>
                         @elseif($order->status === 'accepted')
                             <form action="{{ route('seller.orders.update-status', $order) }}" method="POST" class="w-full">
                                 @csrf @method('PATCH')
                                 <input type="hidden" name="status" value="handed_to_courier">
-                                <button type="submit" class="w-full text-center text-sm font-bold text-purple-700 bg-purple-50 py-2 rounded-lg active:bg-purple-100">Hand to Courier</button>
+                                <button type="submit" class="w-full text-center text-sm font-bold text-purple-700 bg-purple-50 py-2 rounded-lg active:bg-purple-100">@trans('Hand to Courier')</button>
                             </form>
                         @elseif($order->status === 'handed_to_courier')
                              <form action="{{ route('seller.orders.update-status', $order) }}" method="POST" class="w-full">
                                 @csrf @method('PATCH')
                                 <input type="hidden" name="status" value="completed">
-                                <button type="submit" class="w-full text-center text-sm font-bold text-emerald-700 bg-emerald-50 py-2 rounded-lg active:bg-emerald-100">Mark Completed</button>
+                                <button type="submit" class="w-full text-center text-sm font-bold text-emerald-700 bg-emerald-50 py-2 rounded-lg active:bg-emerald-100">@trans('Mark Completed')</button>
                             </form>
                         @else
-                            <a href="{{ route('seller.orders.show', $order) }}" class="w-full text-center text-sm font-bold text-stone-600 bg-stone-100 py-2 rounded-lg active:bg-stone-200">View Details</a>
+                            <a href="{{ route('seller.orders.show', $order) }}" class="w-full text-center text-sm font-bold text-stone-600 bg-stone-100 py-2 rounded-lg active:bg-stone-200">@trans('View Details')</a>
                         @endif
                     </div>
                 </div>
@@ -211,7 +211,7 @@
             <svg class="w-16 h-16 mx-auto text-stone-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
             </svg>
-            <h3 class="text-lg font-medium text-stone-900">No orders found</h3>
+            <h3 class="text-lg font-medium text-stone-900">@trans('No orders found')</h3>
             <p class="text-stone-500 mt-1">Status: {{ ucfirst($status) }}</p>
         </div>
     @endif

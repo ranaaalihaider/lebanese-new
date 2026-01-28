@@ -4,10 +4,10 @@
     <div class="bg-stone-50 min-h-screen pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
             <div class="flex items-center justify-between mb-8">
-                <h1 class="text-3xl font-bold text-stone-900">My Wishlist</h1>
+                <h1 class="text-3xl font-bold text-stone-900">@trans('My Wishlist')</h1>
                 <a href="{{ route('buyer.home') }}"
                     class="text-emerald-600 hover:text-emerald-700 font-medium flex items-center">
-                    Continue Shopping <span aria-hidden="true" class="ml-1">&rarr;</span>
+                    @trans('Continue Shopping') <span aria-hidden="true" class="ml-1">@trans('&rarr;')</span>
                 </a>
             </div>
 
@@ -19,9 +19,9 @@
                             <!-- Badge (Randomized for visual variety) -->
                             <div class="absolute top-3 right-3 z-10">
                                 @if($product->id % 4 == 0)
-                                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Popular</span>
+                                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">@trans('Popular')</span>
                                 @elseif($product->id % 4 == 1)
-                                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Best Seller</span>
+                                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">@trans('Best Seller')</span>
                                 @endif
                             </div>
 
@@ -69,12 +69,12 @@
                                         {{ $product->seller->sellerProfile->store_name ?? $product->seller->name }}
                                     </p>
 
-                                    <div class="mt-2 text-xs text-gray-400">Final Price</div>
+                                    <div class="mt-2 text-xs text-gray-400">@trans('Final Price')</div>
                                     <div class="flex items-baseline gap-1">
                                         <span class="text-lg font-bold text-emerald-600">{{ number_format($product->price, 0) }}
                                             LBP</span>
                                     </div>
-                                    <p class="text-xs text-gray-400">+6% platform fee</p>
+                                    <p class="text-xs text-gray-400">@trans('+6% platform fee')</p>
 
                                     <!-- Rating Stars -->
                                     <div class="mt-2 flex items-center">
@@ -90,7 +90,7 @@
                                             </div>
                                             <span class="ml-1 text-xs text-gray-400">({{ $product->review_count }})</span>
                                         @else
-                                            <span class="text-xs text-gray-400">No reviews yet</span>
+                                            <span class="text-xs text-gray-400">@trans('No reviews yet')</span>
                                         @endif
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                 <div class="mt-4 flex gap-2 relative z-20">
                                     <a href="{{ route('buyer.products.show', $product) }}"
                                         class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold py-2 rounded-lg text-center transition-colors">
-                                        View Details
+                                        @trans('View Details')
                                     </a>
                                     <form action="{{ route('buyer.cart.store') }}" method="POST">
                                         @csrf
@@ -132,12 +132,12 @@
                             </path>
                         </svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-stone-900 mb-2">Your wishlist is empty</h2>
+                    <h2 class="text-2xl font-bold text-stone-900 mb-2">@trans('Your wishlist is empty')</h2>
                     <p class="text-stone-500 mb-8 max-w-md mx-auto">Start exploring our marketplace and save your favorite items
                         for later.</p>
                     <a href="{{ route('buyer.home') }}"
                         class="inline-block bg-emerald-600 text-white font-bold py-3 px-8 rounded-full hover:bg-emerald-700 transition-colors shadow-lg">
-                        Browse Products
+                        @trans('Browse Products')
                     </a>
                 </div>
             @endif

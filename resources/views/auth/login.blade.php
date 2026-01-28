@@ -5,21 +5,21 @@
         <div class="w-full max-w-sm bg-white rounded-3xl shadow-xl p-8 border border-stone-100">
             <!-- Logo/Header -->
             <div class="text-center mb-10">
-                <h1 class="text-3xl font-bold text-emerald-800 tracking-tight mb-2">Welcome Back</h1>
-                <p class="text-stone-500 text-sm">Sign in to access your marketplace</p>
+                <h1 class="text-3xl font-bold text-emerald-800 tracking-tight mb-2">@trans('Welcome Back')</h1>
+                <p class="text-stone-500 text-sm">@trans('Sign in to access your marketplace')</p>
             </div>
 
             @auth
                 <div class="mb-6 text-center">
-                    <p class="text-stone-600 mb-4">You are already logged in as <strong>{{ Auth::user()->name }}</strong></p>
+                    <p class="text-stone-600 mb-4">@trans('You are already logged in as') <strong>{{ Auth::user()->name }}</strong></p>
                     <a href="{{ route('dashboard') }}"
                         class="block w-full py-4 px-4 border border-transparent rounded-2xl shadow-lg text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition-all">
-                        Go to Dashboard
+                        @trans('Go to Dashboard')
                     </a>
                     <form action="{{ route('logout') }}" method="POST" class="mt-3">
                         @csrf
                         <button type="submit" class="text-sm text-stone-400 hover:text-red-500 font-medium">
-                            or Logout
+                            @trans('or Logout')
                         </button>
                     </form>
                 </div>
@@ -55,7 +55,7 @@
 
                     <button type="submit"
                         class="w-full flex justify-center py-4 px-4 border border-transparent rounded-2xl shadow-lg text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all transform active:scale-95">
-                        Send Verification Code
+                        @trans('Send Verification Code')
                     </button>
                 </form>
 
@@ -64,7 +64,7 @@
                         <div class="w-full border-t border-stone-200"></div>
                     </div>
                     <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-stone-400">New around here?</span>
+                        <span class="px-2 bg-white text-stone-400">@trans('New around here?')</span>
                     </div>
                 </div>
 
@@ -73,11 +73,11 @@
             <div class="mt-6 flex flex-col gap-3">
                 <a href="{{ route('register.buyer') }}"
                     class="w-full flex items-center justify-center px-4 py-3 border-2 border-stone-100 rounded-2xl shadow-sm text-sm font-bold text-stone-600 bg-white hover:bg-stone-50 hover:border-stone-200 transition-all">
-                    Create Buyer Account
+                    @trans('Create Buyer Account')
                 </a>
                 <a href="{{ route('register.seller') }}"
                     class="w-full flex items-center justify-center px-4 py-3 border-2 border-stone-100 rounded-2xl shadow-sm text-sm font-bold text-emerald-600 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-200 transition-all">
-                    Become a Seller
+                    @trans('Become a Seller')
                 </a>
             </div>
         </div>

@@ -7,14 +7,14 @@
         <div class="max-w-7xl mx-auto px-4 py-4 md:py-6">
             <!-- Mobile Header -->
             <div class="md:hidden">
-                <h1 class="text-xl font-bold text-white">Payouts</h1>
+                <h1 class="text-xl font-bold text-white">@trans('Payouts')</h1>
                 <p class="text-emerald-100 text-sm mt-0.5">{{ $orders->total() }} transactions</p>
             </div>
             
             <!-- Desktop Header -->
             <div class="hidden md:block">
-                <h1 class="text-2xl md:text-3xl font-bold text-white">Seller Payouts</h1>
-                <p class="text-emerald-50 text-sm md:text-base mt-1">Manage and release seller earnings</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-white">@trans('Seller Payouts')</h1>
+                <p class="text-emerald-50 text-sm md:text-base mt-1">@trans('Manage and release seller earnings')</p>
             </div>
         </div>
     </div>
@@ -23,11 +23,11 @@
         <!-- Mobile Stats Pills -->
         <div class="md:hidden flex gap-2 px-4 py-3 overflow-x-auto scrollbar-hide bg-white border-b border-stone-100">
             <div class="bg-white rounded-2xl px-4 py-2 flex-shrink-0 shadow-sm border border-orange-100">
-                <p class="text-xs text-orange-600 font-bold">Pending</p>
+                <p class="text-xs text-orange-600 font-bold">@trans('Pending')</p>
                 <p class="text-lg font-bold text-orange-700">${{ number_format($pendingPayouts, 2) }}</p>
             </div>
             <div class="bg-white rounded-2xl px-4 py-2 flex-shrink-0 shadow-sm border border-emerald-100">
-                <p class="text-xs text-emerald-600 font-bold">Paid Out</p>
+                <p class="text-xs text-emerald-600 font-bold">@trans('Paid Out')</p>
                 <p class="text-lg font-bold text-emerald-700">${{ number_format($totalPaidOut, 2) }}</p>
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="hidden md:grid grid-cols-2 gap-6 mb-8">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-bold text-stone-500 uppercase tracking-wide">Pending Payouts</p>
+                    <p class="text-sm font-bold text-stone-500 uppercase tracking-wide">@trans('Pending Payouts')</p>
                     <p class="text-3xl font-bold text-orange-600 mt-2">${{ number_format($pendingPayouts, 2) }}</p>
                 </div>
                 <div class="p-3 bg-orange-50 rounded-full text-orange-600">
@@ -49,7 +49,7 @@
             </div>
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-bold text-stone-500 uppercase tracking-wide">Total Paid Out</p>
+                    <p class="text-sm font-bold text-stone-500 uppercase tracking-wide">@trans('Total Paid Out')</p>
                     <p class="text-3xl font-bold text-emerald-600 mt-2">${{ number_format($totalPaidOut, 2) }}</p>
                 </div>
                 <div class="p-3 bg-emerald-50 rounded-full text-emerald-600">
@@ -64,7 +64,7 @@
         <!-- Filters Section -->
         <div class="bg-white md:rounded-2xl md:shadow-sm md:border md:border-stone-200 p-3 md:p-6 mb-3 md:mb-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                <h2 class="hidden md:block text-xl font-bold text-stone-900">Transactions</h2>
+                <h2 class="hidden md:block text-xl font-bold text-stone-900">@trans('Transactions')</h2>
                 <button onclick="togglePayoutFilters()"
                     class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full md:rounded-xl flex items-center gap-2 transition-colors text-sm font-bold">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,7 +72,7 @@
                             d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
                         </path>
                     </svg>
-                    Toggle Filters
+                    @trans('Toggle Filters')
                 </button>
             </div>
 
@@ -101,7 +101,7 @@
 
                     <select name="seller_id"
                         class="pl-4 pr-10 py-2.5 md:py-2 rounded-full border-stone-300 text-sm focus:border-emerald-500 focus:ring-emerald-500 md:w-40 bg-white">
-                        <option value="all">All Sellers</option>
+                        <option value="all">@trans('All Sellers')</option>
                         @foreach($sellers as $seller)
                             <option value="{{ $seller->id }}" {{ request('seller_id') == $seller->id ? 'selected' : '' }}>
                                 {{ Str::limit($seller->sellerProfile->store_name ?? $seller->name, 15) }}
@@ -111,20 +111,20 @@
 
                     <select name="payout_status"
                         class="pl-4 pr-10 py-2.5 md:py-2 rounded-full border-stone-300 text-sm focus:border-emerald-500 focus:ring-emerald-500 md:w-36 bg-white">
-                        <option value="all" {{ request('payout_status') == 'all' ? 'selected' : '' }}>All Status</option>
-                        <option value="pending" {{ request('payout_status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="paid" {{ request('payout_status') == 'paid' ? 'selected' : '' }}>Paid</option>
+                        <option value="all" {{ request('payout_status') == 'all' ? 'selected' : '' }}>@trans('All Status')</option>
+                        <option value="pending" {{ request('payout_status') == 'pending' ? 'selected' : '' }}>@trans('Pending')</option>
+                        <option value="paid" {{ request('payout_status') == 'paid' ? 'selected' : '' }}>@trans('Paid')</option>
                     </select>
 
                     <button type="submit"
                         class="px-4 py-2.5 md:py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full text-sm font-bold transition-colors">
-                        Apply Filters
+                        @trans('Apply Filters')
                     </button>
 
                     @if(request()->anyFilled(['search', 'start_date', 'end_date', 'seller_id', 'payout_status']) && (request('seller_id') != 'all' || request('payout_status') != 'all'))
                         <a href="{{ route('admin.payouts.index') }}"
                             class="flex items-center justify-center px-4 py-2.5 md:py-2 bg-stone-200 hover:bg-stone-300 text-stone-700 rounded-full text-sm font-bold transition-colors">
-                            Clear
+                            @trans('Clear')
                         </a>
                     @endif
                 </form>
@@ -150,21 +150,21 @@
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
-                                    Paid
+                                    @trans('Paid')
                                 </span>
                             @else
                                 <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-800">
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
-                                    Pending
+                                    @trans('Pending')
                                 </span>
                             @endif
                         </div>
 
                         <!-- Seller Info -->
                         <div class="mb-3">
-                            <p class="text-xs text-stone-500 uppercase font-bold mb-1">Seller</p>
+                            <p class="text-xs text-stone-500 uppercase font-bold mb-1">@trans('Seller')</p>
                             <a href="{{ route('admin.stores.show', $order->seller_id) }}"
                                 class="text-sm font-medium text-stone-900 hover:text-emerald-600">
                                 {{ $order->seller->sellerProfile->store_name ?? $order->seller->name }}
@@ -179,11 +179,11 @@
                         <!-- Amount -->
                         <div class="bg-stone-50 rounded-xl p-3 mb-3">
                             <div class="flex justify-between text-sm mb-1">
-                                <span class="text-stone-600">Seller Earning</span>
+                                <span class="text-stone-600">@trans('Seller Earning')</span>
                                 <span class="font-bold text-stone-900">${{ number_format($order->seller_earning, 2) }}</span>
                             </div>
                             <div class="flex justify-between text-xs">
-                                <span class="text-stone-500">Platform Fee</span>
+                                <span class="text-stone-500">@trans('Platform Fee')</span>
                                 <span class="text-stone-600">${{ number_format($order->platform_fee, 2) }}</span>
                             </div>
                         </div>
@@ -193,7 +193,7 @@
                             <button
                                 onclick="openPayoutModal('{{ $order->id }}', '{{ $order->order_number }}', '{{ $order->seller_earning }}', '{{ $order->seller->sellerProfile->bank_name ?? '' }}', '{{ $order->seller->sellerProfile->account_title ?? '' }}', '{{ $order->seller->sellerProfile->account_number ?? '' }}')"
                                 class="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold transition-colors">
-                                Release Payout
+                                @trans('Release Payout')
                             </button>
                         @else
                             <button onclick='openViewPayoutModal(@json($order))'
@@ -202,7 +202,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                 </svg>
-                                View Details
+                                @trans('View Details')
                             </button>
                         @endif
                     </div>
@@ -215,11 +215,11 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-stone-50 border-b border-stone-200 text-xs uppercase text-stone-500 font-bold tracking-wider">
-                                <th class="px-6 py-4">Order Details</th>
-                                <th class="px-6 py-4">Seller Info</th>
-                                <th class="px-6 py-4">Amount</th>
-                                <th class="px-6 py-4">Payout Status</th>
-                                <th class="px-6 py-4 text-right">Action</th>
+                                <th class="px-6 py-4">@trans('Order Details')</th>
+                                <th class="px-6 py-4">@trans('Seller Info')</th>
+                                <th class="px-6 py-4">@trans('Amount')</th>
+                                <th class="px-6 py-4">@trans('Payout Status')</th>
+                                <th class="px-6 py-4 text-right">@trans('Action')</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-stone-200 bg-white">
@@ -248,7 +248,7 @@
                                                 {{ $order->seller->sellerProfile->account_number ?? 'No Acc #' }}
                                             </div>
                                         @else
-                                            <span class="text-xs text-red-500">No Profile</span>
+                                            <span class="text-xs text-red-500">@trans('No Profile')</span>
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">
@@ -264,7 +264,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M5 13l4 4L19 7"></path>
                                                 </svg>
-                                                Paid
+                                                @trans('Paid')
                                             </span>
                                             <div class="text-xs text-stone-500 mt-1">{{ $order->payout_date->format('M d, Y') }}</div>
                                         @else
@@ -274,7 +274,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                                 </svg>
-                                                Pending
+                                                @trans('Pending')
                                             </span>
                                         @endif
                                     </td>
@@ -283,7 +283,7 @@
                                             <button
                                                 onclick="openPayoutModal('{{ $order->id }}', '{{ $order->order_number }}', '{{ $order->seller_earning }}', '{{ $order->seller->sellerProfile->bank_name ?? '' }}', '{{ $order->seller->sellerProfile->account_title ?? '' }}', '{{ $order->seller->sellerProfile->account_number ?? '' }}')"
                                                 class="text-white bg-emerald-600 hover:bg-emerald-700 text-sm font-bold px-4 py-2 rounded-lg transition-colors">
-                                                Release Payout
+                                                @trans('Release Payout')
                                             </button>
                                         @else
                                             <button onclick='openViewPayoutModal(@json($order))'
@@ -315,8 +315,8 @@
                         d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                     </path>
                 </svg>
-                <h3 class="text-lg font-bold text-stone-900">No payouts found</h3>
-                <p class="text-stone-500 mt-1">Try adjusting your filters or check back later</p>
+                <h3 class="text-lg font-bold text-stone-900">@trans('No payouts found')</h3>
+                <p class="text-stone-500 mt-1">@trans('Try adjusting your filters or check back later')</p>
             </div>
         @endif
     </div>
@@ -327,7 +327,7 @@
     class="hidden fixed inset-0 bg-stone-900 bg-opacity-50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl transform transition-all scale-100">
         <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl">
-            <h3 class="text-lg font-bold text-stone-900">Release Payout</h3>
+            <h3 class="text-lg font-bold text-stone-900">@trans('Release Payout')</h3>
             <button onclick="closePayoutModal()" class="text-stone-400 hover:text-stone-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -340,45 +340,45 @@
             @csrf
             <div class="p-6 space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">Order Number</label>
+                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Order Number')</label>
                     <p id="modalOrderNumber" class="text-lg font-bold text-stone-900">#</p>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">Amount to Pay</label>
+                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wide mb-1">@trans('Amount to Pay')</label>
                     <p id="modalAmount" class="text-2xl font-bold text-emerald-600">$0.00</p>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-bold text-stone-700 mb-2">Payment Method</label>
+                    <label class="block text-sm font-bold text-stone-700 mb-2">@trans('Payment Method')</label>
                     <select name="payout_method" id="payoutMethodSelect" onchange="toggleBankDetails()"
                         class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500">
-                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Bank Transfer">@trans('Bank Transfer')</option>
                         <option value="Cash">Cash (In-Hand)</option>
-                        <option value="Check">Check</option>
-                        <option value="Other">Other</option>
+                        <option value="Check">@trans('Check')</option>
+                        <option value="Other">@trans('Other')</option>
                     </select>
                 </div>
 
                 <div id="bankDetailsSection" class="bg-emerald-50 p-3 rounded-lg border border-emerald-100">
-                    <p class="text-xs font-bold text-emerald-700 uppercase mb-1">Seller Bank Details</p>
+                    <p class="text-xs font-bold text-emerald-700 uppercase mb-1">@trans('Seller Bank Details')</p>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <span class="text-xs text-emerald-600 block">Bank Name</span>
-                            <p id="modalBankNameDisplay" class="text-sm text-emerald-900 font-medium">N/A</p>
+                            <span class="text-xs text-emerald-600 block">@trans('Bank Name')</span>
+                            <p id="modalBankNameDisplay" class="text-sm text-emerald-900 font-medium">@trans('N/A')</p>
                         </div>
                         <div>
-                            <span class="text-xs text-emerald-600 block">Account Title</span>
-                            <p id="modalAccountTitleDisplay" class="text-sm text-emerald-900 font-medium">N/A</p>
+                            <span class="text-xs text-emerald-600 block">@trans('Account Title')</span>
+                            <p id="modalAccountTitleDisplay" class="text-sm text-emerald-900 font-medium">@trans('N/A')</p>
                         </div>
                         <div class="col-span-2">
-                            <span class="text-xs text-emerald-600 block">Account Number</span>
-                            <p id="modalAccountNumberDisplay" class="text-sm text-emerald-900 font-mono">N/A</p>
+                            <span class="text-xs text-emerald-600 block">@trans('Account Number')</span>
+                            <p id="modalAccountNumberDisplay" class="text-sm text-emerald-900 font-mono">@trans('N/A')</p>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-bold text-stone-700 mb-2">Transaction ID / Reference <span
+                    <label class="block text-sm font-bold text-stone-700 mb-2">@trans('Transaction ID / Reference') <span
                             class="text-red-500">*</span></label>
                     <input type="text" name="payout_transaction_id" required
                         class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500"
@@ -388,7 +388,7 @@
 
             <div class="p-6 bg-stone-50 rounded-b-2xl border-t border-stone-100 flex justify-end gap-3">
                 <button type="button" onclick="closePayoutModal()"
-                    class="px-5 py-2.5 rounded-xl text-stone-600 font-bold hover:bg-stone-200 transition-colors">Cancel</button>
+                    class="px-5 py-2.5 rounded-xl text-stone-600 font-bold hover:bg-stone-200 transition-colors">@trans('Cancel')</button>
                 <button type="submit"
                     class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-200">Confirm
                     Release</button>
@@ -402,7 +402,7 @@
     class="hidden fixed inset-0 bg-stone-900 bg-opacity-50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl transform transition-all scale-100">
         <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl">
-            <h3 class="text-lg font-bold text-stone-900">Payout Details</h3>
+            <h3 class="text-lg font-bold text-stone-900">@trans('Payout Details')</h3>
             <button onclick="closeViewPayoutModal()" class="text-stone-400 hover:text-stone-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -415,11 +415,11 @@
             <!-- Status & Amount -->
             <div class="flex justify-between items-center pb-4 border-b border-stone-100">
                 <div>
-                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">Order #</p>
+                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Order #')</p>
                     <p id="viewOrderNumber" class="text-xl font-bold text-stone-900">#</p>
                 </div>
                 <div class="text-right">
-                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">Paid Amount</p>
+                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Paid Amount')</p>
                     <p id="viewAmount" class="text-2xl font-bold text-emerald-600">$0.00</p>
                 </div>
             </div>
@@ -427,19 +427,19 @@
             <!-- Payment Info -->
             <div class="space-y-4">
                 <div>
-                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">Payment Method</p>
+                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Payment Method')</p>
                     <p id="viewMethod" class="text-stone-900 font-medium"></p>
                 </div>
 
                 <div>
-                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">Transaction ID</p>
+                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Transaction ID')</p>
                     <div class="bg-stone-50 p-2 rounded border border-stone-200">
                         <code id="viewTransactionId" class="text-sm font-mono text-stone-700"></code>
                     </div>
                 </div>
 
                 <div>
-                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">Paid On</p>
+                    <p class="text-xs text-stone-500 uppercase font-bold tracking-wide mb-1">@trans('Paid On')</p>
                     <p id="viewDate" class="text-stone-900"></p>
                 </div>
             </div>
@@ -452,23 +452,23 @@
                             d="M19 21V5a2 2 0 00-2-2H7a2 2 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
                         </path>
                     </svg>
-                    Sent To Bank Account
+                    @trans('Sent To Bank Account')
                 </h4>
                 <div class="space-y-2 text-sm">
                     <div class="flex justify-between">
-                        <span class="text-emerald-700">Bank:</span>
+                        <span class="text-emerald-700">@trans('Bank:')</span>
                         <span id="viewBankName" class="font-medium text-emerald-900"></span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-emerald-700">Title:</span>
+                        <span class="text-emerald-700">@trans('Title:')</span>
                         <span id="viewAccountTitle" class="font-medium text-emerald-900"></span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-emerald-700">Account #:</span>
+                        <span class="text-emerald-700">@trans('Account #:')</span>
                         <span id="viewAccountNumber" class="font-mono font-medium text-emerald-900"></span>
                     </div>
                     <div class="mt-2 text-[10px] text-emerald-600 italic text-center">
-                        *Details at time of payout
+                        @trans('*Details at time of payout')
                     </div>
                 </div>
             </div>
@@ -476,7 +476,7 @@
 
         <div class="p-6 bg-stone-50 rounded-b-2xl border-t border-stone-100 flex justify-end">
             <button onclick="closeViewPayoutModal()"
-                class="px-5 py-2.5 rounded-xl bg-stone-900 text-white font-bold hover:bg-stone-800 transition-colors shadow-lg shadow-stone-200">Close</button>
+                class="px-5 py-2.5 rounded-xl bg-stone-900 text-white font-bold hover:bg-stone-800 transition-colors shadow-lg shadow-stone-200">@trans('Close')</button>
         </div>
     </div>
 </div>

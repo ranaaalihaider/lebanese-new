@@ -5,8 +5,8 @@
         <!-- Header -->
         <div class="bg-white border-b border-stone-200 px-4 md:px-6 py-6 md:py-8">
             <div class="max-w-7xl mx-auto">
-                <h1 class="text-2xl md:text-3xl font-bold text-stone-900">Admin Dashboard</h1>
-                <p class="text-stone-600 text-sm md:text-base mt-1">Platform Overview & System Management</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-stone-900">@trans('Admin Dashboard')</h1>
+                <p class="text-stone-600 text-sm md:text-base mt-1">@trans('Platform Overview & System Management')</p>
             </div>
         </div>
 
@@ -16,7 +16,7 @@
                 <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-2xl border border-amber-200 shadow-sm">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-bold text-amber-600 uppercase mb-1">Pending Approvals</p>
+                            <p class="text-xs font-bold text-amber-600 uppercase mb-1">@trans('Pending Approvals')</p>
                             <p class="text-3xl md:text-4xl font-bold text-amber-900">{{ $pendingSellers }}</p>
                         </div>
                         <div class="bg-amber-500 p-3 rounded-full shadow-md">
@@ -32,7 +32,7 @@
                     class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-2xl border border-emerald-200 shadow-sm">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-bold text-emerald-600 uppercase mb-1">Active Sellers</p>
+                            <p class="text-xs font-bold text-emerald-600 uppercase mb-1">@trans('Active Sellers')</p>
                             <p class="text-3xl md:text-4xl font-bold text-emerald-900">{{ $totalSellers }}</p>
                         </div>
                         <div class="bg-emerald-500 p-3 rounded-full shadow-md">
@@ -48,7 +48,7 @@
                 <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-2xl border border-blue-200 shadow-sm">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-bold text-blue-600 uppercase mb-1">Total Buyers</p>
+                            <p class="text-xs font-bold text-blue-600 uppercase mb-1">@trans('Total Buyers')</p>
                             <p class="text-3xl md:text-4xl font-bold text-blue-900">{{ $totalBuyers }}</p>
                         </div>
                         <div class="bg-blue-500 p-3 rounded-full shadow-md">
@@ -64,7 +64,7 @@
 
             <!-- Quick Actions Grid -->
             <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 mb-6">
-                <h2 class="text-xl font-bold text-stone-900 mb-5">Quick Actions</h2>
+                <h2 class="text-xl font-bold text-stone-900 mb-5">@trans('Quick Actions')</h2>
                 <div class="grid grid-cols-2 md:grid-cols-6 gap-3 md:gap-4">
                     <a href="{{ route('admin.sellers') }}"
                         class="group flex flex-col items-center p-4 md:p-5 bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 rounded-xl border-2 border-blue-200 hover:border-blue-300 transition-all">
@@ -75,7 +75,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <span class="text-sm font-bold text-stone-700 text-center">Sellers</span>
+                        <span class="text-sm font-bold text-stone-700 text-center">@trans('Sellers')</span>
                     </a>
 
                     <a href="{{ route('admin.buyers') }}"
@@ -88,7 +88,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <span class="text-sm font-bold text-stone-700 text-center">Buyers</span>
+                        <span class="text-sm font-bold text-stone-700 text-center">@trans('Buyers')</span>
                     </a>
 
                     <a href="{{ route('admin.products.index') }}"
@@ -100,7 +100,7 @@
                                     d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                             </svg>
                         </div>
-                        <span class="text-sm font-bold text-stone-700 text-center">Products</span>
+                        <span class="text-sm font-bold text-stone-700 text-center">@trans('Products')</span>
                     </a>
 
                     <a href="{{ route('admin.lists') }}"
@@ -112,7 +112,7 @@
                                     d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                             </svg>
                         </div>
-                        <span class="text-sm font-bold text-stone-700 text-center">Lists</span>
+                        <span class="text-sm font-bold text-stone-700 text-center">@trans('Lists')</span>
                     </a>
 
                     <a href="{{ route('admin.earnings') }}"
@@ -125,7 +125,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <span class="text-sm font-bold text-stone-700 text-center">Revenue</span>
+                        <span class="text-sm font-bold text-stone-700 text-center">@trans('Revenue')</span>
                     </a>
 
                     <a href="{{ route('admin.settings') }}"
@@ -140,36 +140,36 @@
                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                         </div>
-                        <span class="text-sm font-bold text-stone-700 text-center">Settings</span>
+                        <span class="text-sm font-bold text-stone-700 text-center">@trans('Settings')</span>
                     </a>
                 </div>
             </div>
 
             <!-- System Health -->
             <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
-                <h2 class="text-xl font-bold text-stone-900 mb-5">System Health</h2>
+                <h2 class="text-xl font-bold text-stone-900 mb-5">@trans('System Health')</h2>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between p-4 bg-emerald-50 rounded-xl border border-emerald-200">
                         <div class="flex items-center gap-3">
                             <div class="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
-                            <span class="font-semibold text-stone-900">Platform Status</span>
+                            <span class="font-semibold text-stone-900">@trans('Platform Status')</span>
                         </div>
-                        <span class="text-sm font-bold text-emerald-600">Online</span>
+                        <span class="text-sm font-bold text-emerald-600">@trans('Online')</span>
                     </div>
 
                     <div class="flex items-center justify-between p-4 bg-blue-50 rounded-xl border border-blue-200">
                         <div class="flex items-center gap-3">
                             <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                            <span class="font-semibold text-stone-900">Database Connection</span>
+                            <span class="font-semibold text-stone-900">@trans('Database Connection')</span>
                         </div>
-                        <span class="text-sm font-bold text-blue-600">Connected</span>
+                        <span class="text-sm font-bold text-blue-600">@trans('Connected')</span>
                     </div>
 
                     @if($pendingSellers > 0)
                         <div class="flex items-center justify-between p-4 bg-amber-50 rounded-xl border border-amber-200">
                             <div class="flex items-center gap-3">
                                 <div class="w-3 h-3 bg-amber-500 rounded-full"></div>
-                                <span class="font-semibold text-stone-900">Pending Actions</span>
+                                <span class="font-semibold text-stone-900">@trans('Pending Actions')</span>
                             </div>
                             <a href="{{ route('admin.sellers', ['status' => 'pending']) }}"
                                 class="text-sm font-bold text-amber-600 hover:text-amber-700 hover:underline">

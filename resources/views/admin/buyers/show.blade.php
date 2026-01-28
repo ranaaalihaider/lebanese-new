@@ -8,11 +8,11 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-bold text-stone-900">{{ $buyer->name }}</h1>
-                        <p class="text-stone-600 text-sm md:text-base mt-1">Buyer Profile & Order History</p>
+                        <p class="text-stone-600 text-sm md:text-base mt-1">@trans('Buyer Profile & Order History')</p>
                     </div>
                     <a href="{{ route('admin.buyers') }}"
                         class="bg-stone-200 hover:bg-stone-300 text-stone-700 px-4 py-2 rounded-xl font-bold transition-colors">
-                        ← Back
+                        @trans('← Back')
                     </a>
                 </div>
             </div>
@@ -28,22 +28,22 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
-                        Contact Information
+                        @trans('Contact Information')
                     </h3>
                     <div class="space-y-3">
                         <div>
-                            <p class="text-xs text-stone-500 uppercase font-bold">Email</p>
+                            <p class="text-xs text-stone-500 uppercase font-bold">@trans('Email')</p>
                             <p class="text-sm text-stone-900">{{ $buyer->email }}</p>
                         </div>
                         <div>
-                            <p class="text-xs text-stone-500 uppercase font-bold">Phone</p>
+                            <p class="text-xs text-stone-500 uppercase font-bold">@trans('Phone')</p>
                             <p class="text-sm text-stone-900">
                                 <a href="tel:{{ $buyer->phone }}"
                                     class="text-blue-600 hover:underline">{{ $buyer->phone }}</a>
                             </p>
                         </div>
                         <div>
-                            <p class="text-xs text-stone-500 uppercase font-bold">Member Since</p>
+                            <p class="text-xs text-stone-500 uppercase font-bold">@trans('Member Since')</p>
                             <p class="text-sm text-stone-900">{{ $buyer->created_at->format('M d, Y') }}</p>
                         </div>
                     </div>
@@ -52,20 +52,20 @@
                 <!-- Order Statistics -->
                 <div class="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                     <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-2xl border border-blue-200">
-                        <p class="text-xs font-bold text-blue-600 uppercase">Total Orders</p>
+                        <p class="text-xs font-bold text-blue-600 uppercase">@trans('Total Orders')</p>
                         <p class="text-3xl font-bold text-blue-900 mt-1">{{ $stats['total_orders'] }}</p>
                     </div>
                     <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-4 rounded-2xl border border-emerald-200">
-                        <p class="text-xs font-bold text-emerald-600 uppercase">Total Spent</p>
+                        <p class="text-xs font-bold text-emerald-600 uppercase">@trans('Total Spent')</p>
                         <p class="text-3xl font-bold text-emerald-900 mt-1">${{ number_format($stats['total_spent'], 2) }}
                         </p>
                     </div>
                     <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-4 rounded-2xl border border-amber-200">
-                        <p class="text-xs font-bold text-amber-600 uppercase">Pending</p>
+                        <p class="text-xs font-bold text-amber-600 uppercase">@trans('Pending')</p>
                         <p class="text-3xl font-bold text-amber-900 mt-1">{{ $stats['pending_orders'] }}</p>
                     </div>
                     <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-2xl border border-purple-200">
-                        <p class="text-xs font-bold text-purple-600 uppercase">Completed</p>
+                        <p class="text-xs font-bold text-purple-600 uppercase">@trans('Completed')</p>
                         <p class="text-3xl font-bold text-purple-900 mt-1">{{ $stats['completed_orders'] }}</p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
 
             <!-- Order History -->
             <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6">
-                <h3 class="text-xl font-bold text-stone-900 mb-4">Order History</h3>
+                <h3 class="text-xl font-bold text-stone-900 mb-4">@trans('Order History')</h3>
 
                 @if($orders->count() > 0)
                     <!-- Mobile: Order Cards -->
@@ -109,12 +109,12 @@
                         <table class="min-w-full divide-y divide-stone-200">
                             <thead class="bg-stone-50">
                                 <tr>
-                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">Date</th>
-                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">Order #</th>
-                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">Product</th>
-                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">Seller</th>
-                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">Status</th>
-                                    <th class="px-4 py-3 text-right text-xs font-bold text-stone-500 uppercase">Amount</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">@trans('Date')</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">@trans('Order #')</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">@trans('Product')</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">@trans('Seller')</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase">@trans('Status')</th>
+                                    <th class="px-4 py-3 text-right text-xs font-bold text-stone-500 uppercase">@trans('Amount')</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-stone-200">
@@ -160,7 +160,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                         </svg>
-                        <p class="text-stone-500">No orders yet</p>
+                        <p class="text-stone-500">@trans('No orders yet')</p>
                     </div>
                 @endif
             </div>

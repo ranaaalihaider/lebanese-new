@@ -11,7 +11,7 @@
             <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
                 <div>
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Order Details
+                        @trans('Order Details')
                     </h3>
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">
                         Order #{{ $order->order_number }}
@@ -36,7 +36,7 @@
                 <dl>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Product
+                            @trans('Product')
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <a href="{{ route('buyer.products.show', $order->product) }}"
@@ -47,7 +47,7 @@
                     </div>
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Store
+                            @trans('Store')
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <a href="{{ route('buyer.stores.show', $order->product->seller) }}"
@@ -58,7 +58,7 @@
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Quantity
+                            @trans('Quantity')
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             {{ $order->quantity }}
@@ -66,7 +66,7 @@
                     </div>
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Total Price
+                            @trans('Total Price')
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 font-bold">
                             ${{ number_format($order->total_price, 2) }}
@@ -74,7 +74,7 @@
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Order Date
+                            @trans('Order Date')
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             {{ $order->created_at->format('F d, Y h:i A') }}
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="ml-3 flex-1 md:flex md:justify-between">
                                         <p class="text-sm text-blue-700">
-                                            This order is pending acceptance by the seller.
+                                            @trans('This order is pending acceptance by the seller.')
                                         </p>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                     @if($order->seller_notes)
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
-                                Seller Notes
+                                @trans('Seller Notes')
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                 {{ $order->seller_notes }}
@@ -116,7 +116,7 @@
                     @endif
 
                     <div class="bg-gray-100 px-4 py-5 sm:px-6">
-                        <h4 class="text-sm font-medium text-gray-900 mb-2">Delivery Information</h4>
+                        <h4 class="text-sm font-medium text-gray-900 mb-2">@trans('Delivery Information')</h4>
                         <p class="text-sm text-gray-600">{{ $order->customer_name }}</p>
                         <p class="text-sm text-gray-600">{{ $order->customer_address }}</p>
                         <p class="text-sm text-gray-600">Phone: {{ $order->customer_phone }}</p>

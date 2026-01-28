@@ -8,13 +8,13 @@
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
         </div>
-        <h1 class="text-2xl font-bold mb-2">Account Pending</h1>
+        <h1 class="text-2xl font-bold mb-2">@trans('Account Pending')</h1>
         <p class="text-gray-600 mb-6">Your seller account is currently under review by the administrator. Please check back
             later.</p>
 
         <form action="{{ route('logout') }}" method="POST">
             @csrf
-            <button type="submit" class="text-blue-500 font-bold hover:underline">Return support / Logout</button>
+            <button type="submit" class="text-blue-500 font-bold hover:underline">@trans('Return support / Logout')</button>
         </form>
     </div>
 @endsection

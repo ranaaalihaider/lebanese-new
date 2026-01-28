@@ -78,7 +78,7 @@
                                 <span class="text-sm text-stone-500">({{ $product->reviews->count() }} reviews)</span>
                             </div>
                         @else
-                            <span class="text-sm text-stone-400">No reviews yet</span>
+                            <span class="text-sm text-stone-400">@trans('No reviews yet')</span>
                         @endif
                     </div>
                 </div>
@@ -94,21 +94,21 @@
                         </svg>
                     </div>
                     <div class="flex-1">
-                        <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider mb-0.5">Sold by</p>
+                        <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider mb-0.5">@trans('Sold by')</p>
                         <p class="text-stone-900 font-bold text-base">{{ $product->seller->sellerProfile->store_name }}</p>
                     </div>
                     <a href="{{ route('buyer.stores.show', $product->seller->id) }}"
                         class="text-emerald-700 font-bold text-xs bg-white px-4 py-2 rounded-full border border-emerald-100 shadow-sm hover:shadow hover:scale-105 transition-all">
-                        Visit Store
+                        @trans('Visit Store')
                     </a>
                 </div>
 
                 <!-- Description -->
                 <div class="mb-10">
-                    <h3 class="font-bold text-stone-900 mb-3 text-lg">About this product</h3>
+                    <h3 class="font-bold text-stone-900 mb-3 text-lg">@trans('About this product')</h3>
                     <div class="mt-4">
                         <p class="text-3xl font-bold text-emerald-600">{{ number_format($product->final_price, 0) }} LBP</p>
-                        <p class="text-xs text-stone-500 mt-1">Final price including calculated fees</p>
+                        <p class="text-xs text-stone-500 mt-1">@trans('Final price including calculated fees')</p>
                     </div>
                     <div class="text-stone-600 leading-relaxed text-base space-y-4">
                         <div class="prose prose-stone prose-sm max-w-none">
@@ -119,7 +119,7 @@
 
                 <!-- Reviews Section -->
                 <div class="mb-10 border-t border-stone-100 pt-8">
-                    <h3 class="font-bold text-stone-900 mb-6 text-lg">Customer Reviews</h3>
+                    <h3 class="font-bold text-stone-900 mb-6 text-lg">@trans('Customer Reviews')</h3>
 
                     @if($product->reviews->count() > 0)
                         <div class="space-y-6">
@@ -161,7 +161,7 @@
                         </div>
                     @else
                         <div class="text-center py-8 bg-stone-50 rounded-xl border border-dashed border-stone-200">
-                            <p class="text-stone-500 text-sm">No reviews yet. Be the first to review this product!</p>
+                            <p class="text-stone-500 text-sm">@trans('No reviews yet. Be the first to review this product!')</p>
                         </div>
                     @endif
                 </div>
@@ -179,12 +179,12 @@
                                             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
                                         </path>
                                     </svg>
-                                    Proceed to Checkout
+                                    @trans('Proceed to Checkout')
                                 </a>
                             @else
                                 <div
                                     class="w-full bg-stone-100 text-stone-500 font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 cursor-not-allowed">
-                                    You own this product
+                                    @trans('You own this product')
                                 </div>
                             @endif
                         @else
@@ -195,11 +195,11 @@
                                         d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
                                     </path>
                                 </svg>
-                                Log in to Buy
+                                @trans('Log in to Buy')
                             </a>
                         @endauth
 
-                        <p class="text-center text-xs text-stone-400 mt-3 font-medium">Secure checkout via Lebanese Marketplace.
+                        <p class="text-center text-xs text-stone-400 mt-3 font-medium">@trans('Secure checkout via Lebanese Marketplace.')
                         </p>
                     </div>
                 @else
@@ -212,7 +212,7 @@
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             <div>
-                                <p class="text-sm font-bold text-blue-900 mb-1">Admin/Seller View</p>
+                                <p class="text-sm font-bold text-blue-900 mb-1">@trans('Admin/Seller View')</p>
                                 <p class="text-xs text-blue-700">You are viewing this product as {{ auth()->user()->role }}.
                                     Buyer checkout features are hidden.</p>
                             </div>
@@ -236,13 +236,13 @@
                         @else
                             <div
                                 class="flex-1 bg-stone-100 text-stone-500 font-bold py-3.5 px-4 rounded-xl flex items-center justify-center">
-                                You own this
+                                @trans('You own this')
                             </div>
                         @endif
                     @else
                         <a href="{{ route('buyer.checkout.show', $product) }}"
                             class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-900/20 flex items-center justify-center gap-2 transform active:scale-95 transition-all">
-                            Log in to Buy
+                            @trans('Log in to Buy')
                         </a>
                     @endauth
                 </div>

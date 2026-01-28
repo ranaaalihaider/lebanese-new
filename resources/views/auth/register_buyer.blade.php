@@ -13,8 +13,8 @@
 
         <div class="w-full max-w-sm bg-white rounded-3xl shadow-xl p-8 border border-stone-100">
             <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold text-emerald-900">Create Account</h2>
-                <p class="text-stone-500 text-sm">Join to shop fresh local produce</p>
+                <h2 class="text-2xl font-bold text-emerald-900">@trans('Create Account')</h2>
+                <p class="text-stone-500 text-sm">@trans('Join to shop fresh local produce')</p>
             </div>
 
             <form method="POST" action="{{ route('register.buyer') }}" class="space-y-6">
@@ -40,13 +40,13 @@
 
                 <button type="submit"
                     class="w-full flex justify-center py-4 px-4 border border-transparent rounded-2xl shadow-lg text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all transform active:scale-95">
-                    Create Account
+                    @trans('Create Account')
                 </button>
             </form>
 
             <div class="mt-8 text-center">
-                <p class="text-xs text-stone-400">By registering, you agree to our <a href="#"
-                        class="text-emerald-600 hover:underline">Terms of Service</a></p>
+                <p class="text-xs text-stone-400">@trans('By registering, you agree to our') <a href="#"
+                        class="text-emerald-600 hover:underline">@trans('Terms of Service')</a></p>
                 <div class="mt-4 pt-4 border-t border-stone-100">
                     <a href="{{ route('login') }}" class="text-sm font-bold text-emerald-700 hover:text-emerald-800">Already
                         have an account? Log in</a>

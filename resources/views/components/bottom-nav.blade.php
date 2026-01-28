@@ -15,7 +15,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-xs font-bold whitespace-nowrap">Dashboard</span>
+                <span class="text-xs font-bold whitespace-nowrap">@trans('Dashboard')</span>
             </a>
 
             <!-- Orders -->
@@ -29,7 +29,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-xs font-bold whitespace-nowrap">Orders</span>
+                <span class="text-xs font-bold whitespace-nowrap">@trans('Orders')</span>
             </a>
 
             <!-- Sellers -->
@@ -43,7 +43,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-xs font-bold whitespace-nowrap">Sellers</span>
+                <span class="text-xs font-bold whitespace-nowrap">@trans('Sellers')</span>
             </a>
 
             <!-- Buyers -->
@@ -57,7 +57,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-xs font-bold whitespace-nowrap">Buyers</span>
+                <span class="text-xs font-bold whitespace-nowrap">@trans('Buyers')</span>
             </a>
 
             <!-- Products -->
@@ -70,7 +70,7 @@
                             d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                     </svg>
                 </div>
-                <span class="text-xs font-bold whitespace-nowrap">Products</span>
+                <span class="text-xs font-bold whitespace-nowrap">@trans('Products')</span>
             </a>
 
             <!-- Revenue -->
@@ -84,7 +84,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-xs font-bold whitespace-nowrap">Revenue</span>
+                <span class="text-xs font-bold whitespace-nowrap">@trans('Revenue')</span>
             </a>
 
             <!-- Payouts -->
@@ -98,7 +98,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-xs font-bold whitespace-nowrap">Payouts</span>
+                <span class="text-xs font-bold whitespace-nowrap">@trans('Payouts')</span>
             </a>
         </div>
 
@@ -118,7 +118,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-[10px] font-bold tracking-wide">Status</span>
+                <span class="text-[10px] font-bold tracking-wide">@trans('Status')</span>
             </a>
 
             <!-- Orders -->
@@ -133,7 +133,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-[10px] font-bold tracking-wide">Orders</span>
+                <span class="text-[10px] font-bold tracking-wide">@trans('Orders')</span>
             </a>
 
             <!-- Products -->
@@ -149,7 +149,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-[10px] font-bold tracking-wide">Products</span>
+                <span class="text-[10px] font-bold tracking-wide">@trans('Products')</span>
             </a>
 
             <!-- Earnings -->
@@ -163,7 +163,7 @@
                             d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                     </svg>
                 </div>
-                <span class="text-[10px] font-bold tracking-wide">Earnings</span>
+                <span class="text-[10px] font-bold tracking-wide">@trans('Earnings')</span>
             </a>
 
         </nav>
@@ -182,7 +182,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-[10px] font-bold tracking-wide">Home</span>
+                <span class="text-[10px] font-bold tracking-wide">@trans('Home')</span>
             </a>
 
             <a href="{{ route('buyer.stores') }}"
@@ -196,7 +196,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-[10px] font-bold tracking-wide">Stores</span>
+                <span class="text-[10px] font-bold tracking-wide">@trans('Stores')</span>
             </a>
 
             <a href="{{ route('buyer.orders.index') }}"
@@ -210,7 +210,7 @@
                         </path>
                     </svg>
                 </div>
-                <span class="text-[10px] font-bold tracking-wide">My Orders</span>
+                <span class="text-[10px] font-bold tracking-wide">@trans('My Orders')</span>
             </a>
         </nav>
     @endif
@@ -229,7 +229,7 @@
                     </path>
                 </svg>
             </div>
-            <span class="text-[10px] font-bold tracking-wide">Home</span>
+            <span class="text-[10px] font-bold tracking-wide">@trans('Home')</span>
         </a>
 
         <a href="{{ route('buyer.stores') }}"
@@ -243,7 +243,7 @@
                     </path>
                 </svg>
             </div>
-            <span class="text-[10px] font-bold tracking-wide">Stores</span>
+            <span class="text-[10px] font-bold tracking-wide">@trans('Stores')</span>
         </a>
 
         <a href="{{ route('login') }}"
@@ -255,7 +255,7 @@
                     </path>
                 </svg>
             </div>
-            <span class="text-[10px] font-bold tracking-wide">Login</span>
+            <span class="text-[10px] font-bold tracking-wide">@trans('Login')</span>
         </a>
     </nav>
 @endauth

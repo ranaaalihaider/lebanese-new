@@ -7,16 +7,16 @@
             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
-            Back to Product
+            @trans('Back to Product')
         </a>
 
-        <h1 class="text-2xl font-bold mb-8 text-stone-900">Checkout</h1>
+        <h1 class="text-2xl font-bold mb-8 text-stone-900">@trans('Checkout')</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Order Summary -->
             <div class="md:col-span-1 md:order-2">
                 <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 sticky top-24">
-                    <h2 class="text-lg font-bold text-stone-900 mb-4">Order Summary</h2>
+                    <h2 class="text-lg font-bold text-stone-900 mb-4">@trans('Order Summary')</h2>
                     <div class="flex gap-3 mb-4">
                         <div class="w-16 h-16 bg-stone-100 rounded-lg overflow-hidden flex-shrink-0">
                             <img src="{{ $product->thumbnail ? asset('storage/' . $product->thumbnail) : 'https://placehold.co/100' }}"
@@ -30,15 +30,15 @@
 
                     <div class="border-t border-stone-100 pt-4 space-y-2">
                         <div class="flex justify-between text-sm">
-                            <span class="text-stone-600">Subtotal</span>
+                            <span class="text-stone-600">@trans('Subtotal')</span>
                             <span class="font-medium">${{ number_format($product->final_price, 2) }}</span>
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span class="text-stone-600">Delivery</span>
-                            <span class="font-medium text-emerald-600">Pending</span>
+                            <span class="text-stone-600">@trans('Delivery')</span>
+                            <span class="font-medium text-emerald-600">@trans('Pending')</span>
                         </div>
                         <div class="border-t border-stone-100 pt-2 mt-2 flex justify-between items-center">
-                            <span class="font-bold text-stone-900">Total</span>
+                            <span class="font-bold text-stone-900">@trans('Total')</span>
                             <span
                                 class="font-bold text-xl text-emerald-700">${{ number_format($product->final_price, 2) }}</span>
                         </div>
@@ -61,11 +61,11 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                            Delivery Address
+                            @trans('Delivery Address')
                         </h2>
 
                         <div class="mb-4">
-                            <label class="block text-sm font-bold text-stone-700 mb-2">Full Address</label>
+                            <label class="block text-sm font-bold text-stone-700 mb-2">@trans('Full Address')</label>
                             <textarea name="delivery_address" rows="3"
                                 class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm"
                                 placeholder="Street, Building, Floor, Apartment..."
@@ -83,7 +83,7 @@
                                     d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
                                 </path>
                             </svg>
-                            Payment Method
+                            @trans('Payment Method')
                         </h2>
 
                         <div class="space-y-3">
@@ -109,7 +109,7 @@
                                 @endforeach
                             @else
                                 <div class="p-4 border border-red-200 bg-red-50 rounded-xl text-red-700 text-sm">
-                                    No payment methods are currently available. Please contact support.
+                                    @trans('No payment methods are currently available. Please contact support.')
                                 </div>
                             @endif
                         </div>
@@ -117,7 +117,7 @@
 
                     <button type="submit"
                         class="w-full bg-emerald-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl hover:bg-emerald-700 transition-all active:scale-95 text-lg">
-                        Place Order
+                        @trans('Place Order')
                     </button>
                 </form>
             </div>

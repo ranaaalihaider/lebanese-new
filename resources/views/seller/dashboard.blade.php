@@ -27,7 +27,7 @@
                             @endif
                         </p>
                         <div class="text-sm text-{{ auth()->user()->status === 'pending' ? 'yellow' : 'red' }}-600 font-medium">
-                            <p>Status: <span class="font-bold uppercase">{{ auth()->user()->status }}</span></p>
+                            <p>@trans('Status:') <span class="font-bold uppercase">{{ auth()->user()->status }}</span></p>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="max-w-7xl mx-auto flex justify-between items-center">
                     <div>
                         <h1 class="text-3xl font-bold text-stone-900">{{ $storeName }} Dashboard</h1>
-                        <p class="text-stone-600 mt-1">Manage your store and track your performance</p>
+                        <p class="text-stone-600 mt-1">@trans('Manage your store and track your performance')</p>
                     </div>
                 </div>
             </div>
@@ -53,11 +53,11 @@
                     <!-- Total Products (Blue) -->
                     <div class="bg-[#2563eb] rounded-2xl p-4 text-white relative overflow-hidden shadow-sm flex flex-col justify-between h-32">
                         <div class="z-10 relative">
-                            <p class="text-blue-100 text-[10px] font-bold tracking-wider uppercase mb-0.5">Products</p>
+                            <p class="text-blue-100 text-[10px] font-bold tracking-wider uppercase mb-0.5">@trans('Products')</p>
                             <p class="text-3xl font-bold">{{ $productsCount }}</p>
                         </div>
                         <a href="{{ route('seller.products.index') }}" class="flex items-center text-xs font-medium text-blue-50 hover:text-white group z-10 relative mt-auto">
-                            View All 
+                            @trans('View All') 
                             <svg class="w-3 h-3 ml-0.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
                         <div class="absolute -right-2 -bottom-4 bg-white/10 p-3 rounded-full rotate-12">
@@ -68,11 +68,11 @@
                     <!-- Pending Orders (Orange) -->
                     <div class="bg-[#f97316] rounded-2xl p-4 text-white relative overflow-hidden shadow-sm flex flex-col justify-between h-32">
                         <div class="z-10 relative">
-                            <p class="text-orange-100 text-[10px] font-bold tracking-wider uppercase mb-0.5">Pending</p>
+                            <p class="text-orange-100 text-[10px] font-bold tracking-wider uppercase mb-0.5">@trans('Pending')</p>
                             <p class="text-3xl font-bold">{{ $pendingOrders }}</p>
                         </div>
                         <a href="{{ route('seller.orders.index', ['status' => 'pending']) }}" class="flex items-center text-xs font-medium text-orange-50 hover:text-white group z-10 relative mt-auto">
-                            Orders
+                            @trans('Orders')
                             <svg class="w-3 h-3 ml-0.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
                         <div class="absolute -right-2 -bottom-4 bg-white/10 p-3 rounded-full rotate-12">
@@ -83,11 +83,11 @@
                     <!-- Total Earnings (Green) -->
                     <div class="col-span-2 md:col-span-1 bg-[#10b981] rounded-2xl p-4 text-white relative overflow-hidden shadow-sm flex flex-col justify-between h-32">
                         <div class="z-10 relative">
-                            <p class="text-emerald-100 text-[10px] font-bold tracking-wider uppercase mb-0.5">Total Earnings</p>
+                            <p class="text-emerald-100 text-[10px] font-bold tracking-wider uppercase mb-0.5">@trans('Total Earnings')</p>
                              <p class="text-3xl font-bold tracking-tight">${{ number_format($earnings, 0) }}<span class="text-lg opacity-80">.{{ explode('.', number_format($earnings, 2))[1] }}</span></p>
                         </div>
                         <a href="{{ route('seller.earnings') }}" class="flex items-center text-xs font-medium text-emerald-50 hover:text-white group z-10 relative mt-auto">
-                            Details
+                            @trans('Details')
                             <svg class="w-3 h-3 ml-0.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
                          <div class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 p-3 rounded-full">
@@ -98,7 +98,7 @@
 
                 <!-- Quick Actions -->
                 <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 mb-6">
-                    <h2 class="text-xl font-bold text-stone-900 mb-4">Quick Actions</h2>
+                    <h2 class="text-xl font-bold text-stone-900 mb-4">@trans('Quick Actions')</h2>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                         <a href="{{ route('seller.products.create') }}"
                             class="flex flex-col items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 rounded-xl border-2 border-emerald-200 hover:border-emerald-300 transition-all group">
@@ -108,7 +108,7 @@
                                     </path>
                                 </svg>
                             </div>
-                            <span class="text-sm font-bold text-stone-700">Add Product</span>
+                            <span class="text-sm font-bold text-stone-700">@trans('Add Product')</span>
                         </a>
 
                         <a href="{{ route('seller.orders.index') }}"
@@ -120,7 +120,7 @@
                                     </path>
                                 </svg>
                             </div>
-                            <span class="text-sm font-bold text-stone-700">View Orders</span>
+                            <span class="text-sm font-bold text-stone-700">@trans('View Orders')</span>
                         </a>
 
                         <a href="{{ route('seller.products.index') }}"
@@ -131,7 +131,7 @@
                                         d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                                 </svg>
                             </div>
-                            <span class="text-sm font-bold text-stone-700">My Products</span>
+                            <span class="text-sm font-bold text-stone-700">@trans('My Products')</span>
                         </a>
 
                         <a href="{{ route('seller.earnings') }}"
@@ -143,7 +143,7 @@
                                     </path>
                                 </svg>
                             </div>
-                            <span class="text-sm font-bold text-stone-700">Analytics</span>
+                            <span class="text-sm font-bold text-stone-700">@trans('Analytics')</span>
                         </a>
                     </div>
                 </div>
@@ -151,9 +151,9 @@
                 <!-- Recent Orders -->
                 <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
                     <div class="px-6 py-4 border-b border-stone-100 flex justify-between items-center bg-stone-50/50">
-                        <h2 class="text-xl font-bold text-stone-900">Recent Orders</h2>
+                        <h2 class="text-xl font-bold text-stone-900">@trans('Recent Orders')</h2>
                         <a href="{{ route('seller.orders.index') }}"
-                            class="text-sm font-semibold text-emerald-600 hover:text-emerald-700">View All</a>
+                            class="text-sm font-semibold text-emerald-600 hover:text-emerald-700">@trans('View All')</a>
                     </div>
 
                     @if($recentOrders->count() > 0)
@@ -221,12 +221,12 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-lg font-bold text-stone-900">No orders yet</h3>
-                            <p class="text-stone-500 text-sm mt-1 mb-4">Your recent orders will show up here once you start selling.
+                            <h3 class="text-lg font-bold text-stone-900">@trans('No orders yet')</h3>
+                            <p class="text-stone-500 text-sm mt-1 mb-4">@trans('Your recent orders will show up here once you start selling.')
                             </p>
                             <a href="{{ route('seller.products.create') }}"
                                 class="inline-flex items-center justify-center px-4 py-2 bg-emerald-600 text-white text-sm font-bold rounded-lg hover:bg-emerald-700 transition-colors">
-                                Add First Product
+                                @trans('Add First Product')
                             </a>
                         </div>
                     @endif

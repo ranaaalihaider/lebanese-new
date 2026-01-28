@@ -100,25 +100,25 @@
                 @auth
                     @if(Auth::user()->role === 'admin')
                         <a href="{{ route('admin.dashboard') }}"
-                            class="{{ request()->routeIs('admin.dashboard') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Dashboard</a>
+                            class="{{ request()->routeIs('admin.dashboard') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Dashboard')</a>
                         <a href="{{ route('admin.orders.index') }}"
-                            class="{{ request()->routeIs('admin.orders*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Orders</a>
+                            class="{{ request()->routeIs('admin.orders*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Orders')</a>
                         <a href="{{ route('admin.sellers') }}"
-                            class="{{ request()->routeIs('admin.sellers*') || request()->routeIs('admin.stores*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Sellers</a>
+                            class="{{ request()->routeIs('admin.sellers*') || request()->routeIs('admin.stores*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Sellers')</a>
                         <a href="{{ route('admin.buyers') }}"
-                            class="{{ request()->routeIs('admin.buyers*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Buyers</a>
+                            class="{{ request()->routeIs('admin.buyers*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Buyers')</a>
                         <a href="{{ route('admin.products.index') }}"
-                            class="{{ request()->routeIs('admin.products*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Products</a>
+                            class="{{ request()->routeIs('admin.products*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Products')</a>
                         <a href="{{ route('admin.earnings') }}"
-                            class="{{ request()->routeIs('admin.earnings') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Revenue</a>
+                            class="{{ request()->routeIs('admin.earnings') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Revenue')</a>
                         <a href="{{ route('admin.payouts.index') }}"
-                            class="{{ request()->routeIs('admin.payouts*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Payouts</a>
+                            class="{{ request()->routeIs('admin.payouts*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Payouts')</a>
 
                         <!-- Admin Dropdown for Management -->
                         <div class="relative group flex-shrink-0" x-data="{ open: false }">
                             <button @click="open = !open" @mouseenter="open = true"
                                 class="flex items-center gap-1 text-emerald-100/80 hover:text-white transition-colors focus:outline-none text-sm md:text-base">
-                                <span>Lists</span>
+                                <span>@trans('Lists')</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                                     </path>
@@ -128,23 +128,23 @@
                                 class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
                                 style="display: none;">
                                 <a href="{{ route('admin.product-types.index') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Product Categories</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@trans('Product Categories')</a>
                                 <a href="{{ route('admin.store-types.index') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Store Categories</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@trans('Store Categories')</a>
                             </div>
                         </div>
 
                     @elseif(Auth::user()->role == 'seller')
                         <a href="{{ route('seller.dashboard') }}"
-                            class="{{ request()->routeIs('seller.dashboard') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Dashboard</a>
+                            class="{{ request()->routeIs('seller.dashboard') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Dashboard')</a>
                         <a href="{{ route('seller.products.index') }}"
-                            class="{{ request()->routeIs('seller.products*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Products</a>
+                            class="{{ request()->routeIs('seller.products*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Products')</a>
 
                         <!-- Orders Dropdown -->
                         <div class="relative group flex-shrink-0" x-data="{ open: false }">
                             <button @click="open = !open" @mouseenter="open = true"
                                 class="flex items-center gap-1 {{ request()->routeIs('seller.orders*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors focus:outline-none text-sm md:text-base">
-                                <span>Orders</span>
+                                <span>@trans('Orders')</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                                     </path>
@@ -154,41 +154,41 @@
                                 class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
                                 style="display: none;">
                                 <a href="{{ route('seller.orders.index', ['status' => 'pending']) }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pending Orders</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@trans('Pending Orders')</a>
                                 <a href="{{ route('seller.orders.index', ['status' => 'new']) }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">New Orders</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@trans('New Orders')</a>
                                 <a href="{{ route('seller.orders.index', ['status' => 'completed']) }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Completed Orders</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@trans('Completed Orders')</a>
                                 <div class="border-t border-gray-100 my-1"></div>
                                 <a href="{{ route('seller.orders.index') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold">All Orders</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold">@trans('All Orders')</a>
                             </div>
                         </div>
 
                         <a href="{{ route('seller.earnings') }}"
-                            class="{{ request()->routeIs('seller.earnings') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Earnings</a>
+                            class="{{ request()->routeIs('seller.earnings') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Earnings')</a>
 
 
                     @else
                         <!-- Buyer / Other Role -->
                         <a href="{{ route('buyer.home') }}"
-                            class="{{ request()->routeIs('buyer.home') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">Home</a>
+                            class="{{ request()->routeIs('buyer.home') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">@trans('Home')</a>
                         <a href="{{ route('buyer.orders.index') }}"
                             class="{{ request()->routeIs('buyer.orders*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors text-sm md:text-base flex-shrink-0">My
                             Orders</a>
                         <a href="{{ route('buyer.wishlist.index') }}"
-                            class="{{ request()->routeIs('buyer.wishlist*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors">Wishlist</a>
+                            class="{{ request()->routeIs('buyer.wishlist*') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors">@trans('Wishlist')</a>
                         <a href="{{ route('buyer.stores') }}"
-                            class="{{ request()->routeIs('buyer.stores') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors">Stores</a>
+                            class="{{ request()->routeIs('buyer.stores') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors">@trans('Stores')</a>
                         <a href="{{ route('about') }}" class="text-emerald-100/80 hover:text-white transition-colors">About
                             Us</a>
                     @endif
                 @else
                     <!-- Guest -->
                     <a href="{{ route('buyer.home') }}"
-                        class="{{ request()->routeIs('buyer.home') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors">Home</a>
+                        class="{{ request()->routeIs('buyer.home') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors">@trans('Home')</a>
                     <a href="{{ route('buyer.stores') }}"
-                        class="{{ request()->routeIs('buyer.stores') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors">Stores</a>
+                        class="{{ request()->routeIs('buyer.stores') ? 'text-emerald-100 font-semibold' : 'text-emerald-100/80 hover:text-white' }} transition-colors">@trans('Stores')</a>
                     <a href="{{ route('about') }}" class="text-emerald-100/80 hover:text-white transition-colors">About
                         Us</a>
                 @endauth
@@ -249,7 +249,7 @@
                             <button @click="open = !open" type="button"
                                 class="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-emerald-800 focus:ring-white"
                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <span class="sr-only">Open user menu</span>
+                                <span class="sr-only">@trans('Open user menu')</span>
                                 <div
                                     class="h-8 w-8 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold">
                                     {{ substr(Auth::user()->name, 0, 1) }}
@@ -267,7 +267,7 @@
                             </div>
                             @if(Auth::user()->role === 'admin')
                                 <a href="{{ route('admin.settings') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">@trans('Settings')</a>
                             @else
                                 <a href="{{ Auth::user()->role === 'buyer' ? route('buyer.orders.index') : route('dashboard') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
@@ -275,19 +275,19 @@
                                 </a>
                             @endif
                             <a href="{{ route('profile.edit') }}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">@trans('Profile')</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
                                     class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    role="menuitem">Log out</button>
+                                    role="menuitem">@trans('Log out')</button>
                             </form>
                         </div>
                     </div>
                 @else
                     <a href="{{ route('login') }}"
                         class="text-sm font-bold bg-white text-emerald-800 px-4 py-1.5 rounded-full hover:bg-emerald-50 transition-colors">
-                        Login
+                        @trans('Login')
                     </a>
                 @endauth
             </div>
@@ -306,7 +306,7 @@
         @if(session('otp_message'))
             <div class="fixed top-0 inset-x-0 z-50 bg-green-100 border-b border-green-400 text-green-700 px-4 py-3 text-center"
                 role="alert">
-                <strong class="font-bold">OTP:</strong>
+                <strong class="font-bold">@trans('OTP:')</strong>
                 <span class="block sm:inline">{{ session('otp_message') }}</span>
             </div>
         @endif

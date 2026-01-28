@@ -23,7 +23,7 @@
                 @endif
                 <div>
                     <h1 class="text-white font-bold text-lg leading-tight">{{ $siteName }}</h1>
-                    <p class="text-emerald-100 text-xs">Guest</p>
+                    <p class="text-emerald-100 text-xs">@trans('Guest')</p>
                 </div>
             </a>
 
@@ -57,7 +57,7 @@
             <!-- Login Button -->
             <a href="{{ route('login') }}"
                 class="bg-white text-emerald-600 px-4 py-1.5 rounded-full font-semibold text-sm hover:bg-emerald-50 transition-colors shadow-md">
-                Login
+                @trans('Login')
             </a>
         </div>
     </div>
@@ -90,7 +90,7 @@
                     </div>
                 @endif
                 <div>
-                    <h1 class="text-white font-bold text-lg leading-tight">LB Marketplace</h1>
+                    <h1 class="text-white font-bold text-lg leading-tight">@trans('LB Marketplace')</h1>
                     <p class="text-emerald-100 text-xs capitalize">{{ Auth::user()->role }}</p>
                 </div>
             </a>
@@ -179,7 +179,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     </svg>
-                                    Settings
+                                    @trans('Settings')
                                 </a>
                             @else
                                 <a href="{{ Auth::user()->role === 'buyer' ? route('buyer.orders.index') : route('dashboard') }}"
@@ -200,7 +200,7 @@
                                             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
                                         </path>
                                     </svg>
-                                    Wishlist
+                                    @trans('Wishlist')
                                 </a>
                             @endif
 
@@ -210,7 +210,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
-                                Profile
+                                @trans('Profile')
                             </a>
 
                             <div class="border-t border-stone-100 my-1"></div>
@@ -224,7 +224,7 @@
                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                                         </path>
                                     </svg>
-                                    Logout
+                                    @trans('Logout')
                                 </button>
                             </form>
                         </div>

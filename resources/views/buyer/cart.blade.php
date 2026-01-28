@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">@trans('Shopping Cart')</h1>
 
     @if($cartItems->count() > 0)
         <div class="flex flex-col lg:flex-row gap-8">
@@ -35,7 +35,7 @@
                                     <form action="{{ route('buyer.cart.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="font-medium text-red-600 hover:text-red-500">Remove</button>
+                                        <button type="submit" class="font-medium text-red-600 hover:text-red-500">@trans('Remove')</button>
                                     </form>
                                 </div>
                             </div>
@@ -47,33 +47,33 @@
             <!-- Order Summary -->
             <div class="w-full lg:w-80">
                 <div class="bg-white shadow-sm rounded-lg border border-gray-100 p-6">
-                    <h2 class="text-lg font-medium text-gray-900 mb-4">Order Summary</h2>
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">@trans('Order Summary')</h2>
                     <div class="flow-root">
                         <dl class="-my-4 divide-y divide-gray-200">
                             <div class="flex items-center justify-between py-4">
-                                <dt class="text-sm text-gray-600">Subtotal</dt>
+                                <dt class="text-sm text-gray-600">@trans('Subtotal')</dt>
                                 <dd class="text-sm font-medium text-gray-900">{{ number_format($cartItems->sum(fn($i) => $i->product->final_price * $i->quantity), 2) }} LBP</dd>
                             </div>
                             <div class="flex items-center justify-between py-4">
-                                <dt class="text-sm text-gray-600">Shipping</dt>
-                                <dd class="text-sm font-medium text-gray-900">Calculated at checkout</dd>
+                                <dt class="text-sm text-gray-600">@trans('Shipping')</dt>
+                                <dd class="text-sm font-medium text-gray-900">@trans('Calculated at checkout')</dd>
                             </div>
                             <div class="flex items-center justify-between py-4">
-                                <dt class="text-base font-medium text-gray-900">Order Total</dt>
+                                <dt class="text-base font-medium text-gray-900">@trans('Order Total')</dt>
                                 <dd class="text-base font-medium text-gray-900">{{ number_format($cartItems->sum(fn($i) => $i->product->final_price * $i->quantity), 2) }} LBP</dd>
                             </div>
                         </dl>
                     </div>
 
                     <div class="mt-6">
-                        <a href="{{ route('buyer.checkout.cart') }}" class="block w-full rounded-md border border-transparent bg-emerald-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 text-center">Checkout</a>
+                        <a href="{{ route('buyer.checkout.cart') }}" class="block w-full rounded-md border border-transparent bg-emerald-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 text-center">@trans('Checkout')</a>
                     </div>
                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
-                            or
+                            @trans('or')
                             <a href="{{ route('buyer.home') }}" class="font-medium text-emerald-600 hover:text-emerald-500">
-                                Continue Shopping
-                                <span aria-hidden="true"> &rarr;</span>
+                                @trans('Continue Shopping')
+                                <span aria-hidden="true"> @trans('&rarr;')</span>
                             </a>
                         </p>
                     </div>
@@ -85,11 +85,11 @@
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
             </svg>
-            <h3 class="mt-2 text-sm font-medium text-gray-900">Your cart is empty</h3>
-            <p class="mt-1 text-sm text-gray-500">Start adding products to see them here.</p>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">@trans('Your cart is empty')</h3>
+            <p class="mt-1 text-sm text-gray-500">@trans('Start adding products to see them here.')</p>
             <div class="mt-6">
                 <a href="{{ route('buyer.home') }}" class="inline-flex items-center rounded-md border border-transparent bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
-                    Browse Products
+                    @trans('Browse Products')
                 </a>
             </div>
         </div>

@@ -7,8 +7,8 @@
             <div class="max-w-7xl mx-auto">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h1 class="text-2xl md:text-3xl font-bold text-stone-900">All Products</h1>
-                        <p class="text-stone-600 text-sm md:text-base mt-1">Browse and manage all marketplace products</p>
+                        <h1 class="text-2xl md:text-3xl font-bold text-stone-900">@trans('All Products')</h1>
+                        <p class="text-stone-600 text-sm md:text-base mt-1">@trans('Browse and manage all marketplace products')</p>
                     </div>
                 </div>
             </div>
@@ -18,15 +18,15 @@
             <!-- Stats Row -->
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-6">
                 <div class="bg-white rounded-xl border border-stone-200 p-4">
-                    <p class="text-xs text-stone-500 uppercase font-bold">Total Products</p>
+                    <p class="text-xs text-stone-500 uppercase font-bold">@trans('Total Products')</p>
                     <p class="text-2xl font-bold text-stone-900 mt-1">{{ $totalProducts }}</p>
                 </div>
                 <div class="bg-emerald-50 rounded-xl border border-emerald-200 p-4">
-                    <p class="text-xs text-emerald-600 uppercase font-bold">Active</p>
+                    <p class="text-xs text-emerald-600 uppercase font-bold">@trans('Active')</p>
                     <p class="text-2xl font-bold text-emerald-700 mt-1">{{ $activeProducts }}</p>
                 </div>
                 <div class="hidden md:block bg-purple-50 rounded-xl border border-purple-200 p-4">
-                    <p class="text-xs text-purple-600 uppercase font-bold">Categories</p>
+                    <p class="text-xs text-purple-600 uppercase font-bold">@trans('Categories')</p>
                     <p class="text-2xl font-bold text-purple-700 mt-1">{{ \App\Models\ProductType::count() }}</p>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             <!-- Search Filters -->
             <div class="bg-white rounded-xl border border-stone-200 p-4 mb-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-bold text-stone-900">Filters</h2>
+                    <h2 class="text-lg font-bold text-stone-900">@trans('Filters')</h2>
                     <button onclick="toggleProductFilters()"
                         class="px-4 py-2 bg-stone-100 text-stone-600 rounded-xl flex items-center gap-2 hover:bg-stone-200 transition-colors text-sm font-bold">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@
                                 d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
                             </path>
                         </svg>
-                        Toggle Filters
+                        @trans('Toggle Filters')
                     </button>
                 </div>
 
@@ -51,7 +51,7 @@
                     <form action="{{ route('admin.products.index') }}" method="GET" class="flex flex-col md:flex-row gap-4">
                         <!-- Product Name Search -->
                         <div class="flex-1">
-                            <label class="block text-xs font-bold text-stone-600 mb-2">Product Name</label>
+                            <label class="block text-xs font-bold text-stone-600 mb-2">@trans('Product Name')</label>
                             <input type="text" name="product_name" value="{{ request('product_name') }}"
                                 placeholder="Search by product name..."
                                 class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm">
@@ -59,10 +59,10 @@
 
                         <!-- Store Filter (Searchable) -->
                         <div class="flex-1">
-                            <label class="block text-xs font-bold text-stone-600 mb-2">Store</label>
+                            <label class="block text-xs font-bold text-stone-600 mb-2">@trans('Store')</label>
                             <select name="store_id" id="product-store-select"
                                 class="searchable-select w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm">
-                                <option value="all">All Stores</option>
+                                <option value="all">@trans('All Stores')</option>
                                 @foreach($sellers as $seller)
                                     <option value="{{ $seller->id }}" {{ request('store_id') == $seller->id ? 'selected' : '' }}>
                                         {{ $seller->sellerProfile->store_name ?? $seller->name }}
@@ -73,10 +73,10 @@
 
                         <!-- Category Filter -->
                         <div class="w-full md:w-40">
-                            <label class="block text-xs font-bold text-stone-600 mb-2">Category</label>
+                            <label class="block text-xs font-bold text-stone-600 mb-2">@trans('Category')</label>
                             <select name="category_id"
                                 class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm h-[38px]">
-                                <option value="all">All</option>
+                                <option value="all">@trans('All')</option>
                                 @foreach($productTypes as $type)
                                     <option value="{{ $type->id }}" {{ request('category_id') == $type->id ? 'selected' : '' }}>
                                         {{ $type->name }}
@@ -87,12 +87,12 @@
 
                         <!-- Status Filter -->
                         <div class="w-full md:w-40">
-                            <label class="block text-xs font-bold text-stone-600 mb-2">Status</label>
+                            <label class="block text-xs font-bold text-stone-600 mb-2">@trans('Status')</label>
                             <select name="status"
                                 class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 shadow-sm text-sm h-[38px]">
-                                <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>All Status</option>
-                                <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Inactive
+                                <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>@trans('All Status')</option>
+                                <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>@trans('Active')</option>
+                                <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>@trans('Inactive')
                                 </option>
                             </select>
                         </div>
@@ -105,7 +105,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
-                                Search
+                                @trans('Search')
                             </button>
                         </div>
                     </form>
@@ -134,15 +134,15 @@
                                     {{ $product->type->name }}
                                 </p>
                                 <div class="mt-2 text-xs">
-                                    <div class="flex justify-between text-stone-500"><span>Base:</span>
+                                    <div class="flex justify-between text-stone-500"><span>@trans('Base:')</span>
                                         <span>${{ number_format($product->price, 2) }}</span>
                                     </div>
-                                    <div class="flex justify-between text-stone-400"><span>Fee:</span>
+                                    <div class="flex justify-between text-stone-400"><span>@trans('Fee:')</span>
                                         <span>${{ number_format($product->final_price - $product->price, 2) }}</span>
                                     </div>
                                     <div
                                         class="flex justify-between font-bold text-emerald-600 border-t border-dashed border-stone-200 mt-1 pt-1">
-                                        <span>Final:</span> <span>${{ number_format($product->final_price, 2) }}</span>
+                                        <span>@trans('Final:')</span> <span>${{ number_format($product->final_price, 2) }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
                                 </form>
                                 <a href="{{ route('admin.stores.show', $product->seller_id) }}"
                                     class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
-                                    View Store
+                                    @trans('View Store')
                                 </a>
                             </div>
                         </div>
@@ -200,15 +200,15 @@
                             </div>
                             <p class="text-sm text-stone-500 mb-3">{{ $product->type->name }}</p>
                             <div class="mb-4 text-sm">
-                                <div class="flex justify-between text-stone-500"><span>Base:</span>
+                                <div class="flex justify-between text-stone-500"><span>@trans('Base:')</span>
                                     <span>${{ number_format($product->price, 2) }}</span>
                                 </div>
-                                <div class="flex justify-between text-stone-400"><span>Fee:</span>
+                                <div class="flex justify-between text-stone-400"><span>@trans('Fee:')</span>
                                     <span>${{ number_format($product->final_price - $product->price, 2) }}</span>
                                 </div>
                                 <div
                                     class="flex justify-between font-bold text-emerald-600 border-t border-dashed border-stone-200 mt-1 pt-1 text-base">
-                                    <span>Final:</span> <span>${{ number_format($product->final_price, 2) }}</span>
+                                    <span>@trans('Final:')</span> <span>${{ number_format($product->final_price, 2) }}</span>
                                 </div>
                             </div>
 
@@ -224,7 +224,7 @@
                                 </form>
                                 <div class="flex items-center gap-2">
                                     <div class="min-w-0 text-right">
-                                        <p class="text-xs text-stone-500">Seller</p>
+                                        <p class="text-xs text-stone-500">@trans('Seller')</p>
                                         <p class="text-xs font-bold text-stone-700 truncate max-w-[100px]">
                                             {{ $product->seller->sellerProfile->store_name }}
                                         </p>
@@ -256,8 +256,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                     </svg>
-                    <h3 class="text-lg font-bold text-stone-900">No products found</h3>
-                    <p class="text-stone-500 mt-1">Products will appear here as sellers add them</p>
+                    <h3 class="text-lg font-bold text-stone-900">@trans('No products found')</h3>
+                    <p class="text-stone-500 mt-1">@trans('Products will appear here as sellers add them')</p>
                 </div>
             @endif
         </div>

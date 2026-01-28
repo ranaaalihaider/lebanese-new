@@ -21,8 +21,8 @@
                 </div>
             </div>
 
-            <h2 class="text-2xl font-bold text-emerald-900 mb-2">Verify it's you</h2>
-            <p class="text-stone-500 text-sm mb-8">We sent a 4-digit code to <br /><span
+            <h2 class="text-2xl font-bold text-emerald-900 mb-2">@trans('Verify it\'s you')</h2>
+            <p class="text-stone-500 text-sm mb-8">@trans('We sent a 4-digit code to') <br /><span
                     class="font-bold text-emerald-700">{{ $phone }}</span></p>
 
             <form method="POST" action="{{ route('verify') }}" class="space-y-8">
@@ -41,12 +41,12 @@
 
                 <button type="submit"
                     class="w-full flex justify-center py-4 px-4 border border-transparent rounded-2xl shadow-lg text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all transform active:scale-95">
-                    Verify & Continue
+                    @trans('Verify & Continue')
                 </button>
             </form>
 
             <div class="mt-8">
-                <p class="text-xs text-stone-400">Didn't receive the code?</p>
+                <p class="text-xs text-stone-400">@trans('Didn\'t receive the code?')</p>
                 <form method="POST" action="{{ route('login') }}" class="inline">
                     @csrf
                     <input type="hidden" name="phone" value="{{ $phone }}">

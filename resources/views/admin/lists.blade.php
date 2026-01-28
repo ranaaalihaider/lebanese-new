@@ -7,8 +7,8 @@
         <!-- Header -->
         <div class="bg-white border-b border-stone-200 px-4 md:px-6 py-6 md:py-8">
             <div class="max-w-7xl mx-auto">
-                <h1 class="text-2xl md:text-3xl font-bold text-stone-900">Manage Lists</h1>
-                <p class="text-stone-600 text-sm md:text-base mt-1">Product Categories & Store Types</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-stone-900">@trans('Manage Lists')</h1>
+                <p class="text-stone-600 text-sm md:text-base mt-1">@trans('Product Categories & Store Types')</p>
             </div>
         </div>
 
@@ -18,14 +18,14 @@
                 <!-- Product Categories -->
                 <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
                     <div class="bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-4">
-                        <h2 class="text-xl font-bold text-white">Product Categories</h2>
+                        <h2 class="text-xl font-bold text-white">@trans('Product Categories')</h2>
                         <p class="text-purple-100 text-sm">{{ $productTypes->count() }} categories</p>
                     </div>
 
                     <div class="p-6">
                         <a href="{{ route('admin.product-types.index') }}"
                             class="block w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-xl mb-4 text-center transition-colors">
-                            Manage Product Categories
+                            @trans('Manage Product Categories')
                         </a>
 
                         <div class="space-y-2 max-h-96 overflow-y-auto">
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                             @empty
-                                <p class="text-center text-stone-500 py-8">No product categories yet</p>
+                                <p class="text-center text-stone-500 py-8">@trans('No product categories yet')</p>
                             @endforelse
                         </div>
                     </div>
@@ -53,14 +53,14 @@
                 <!-- Store Types -->
                 <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
                     <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
-                        <h2 class="text-xl font-bold text-white">Store Types</h2>
+                        <h2 class="text-xl font-bold text-white">@trans('Store Types')</h2>
                         <p class="text-blue-100 text-sm">{{ $storeTypes->count() }} types</p>
                     </div>
 
                     <div class="p-6">
                         <a href="{{ route('admin.store-types.index') }}"
                             class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl mb-4 text-center transition-colors">
-                            Manage Store Types
+                            @trans('Manage Store Types')
                         </a>
 
                         <div class="space-y-2 max-h-96 overflow-y-auto">
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                             @empty
-                                <p class="text-center text-stone-500 py-8">No store types yet</p>
+                                <p class="text-center text-stone-500 py-8">@trans('No store types yet')</p>
                             @endforelse
                         </div>
                     </div>

@@ -15,7 +15,7 @@
                             @endif
                         </div>
                         <div>
-                            <h1 class="text-2xl font-bold text-stone-900">Write a Review</h1>
+                            <h1 class="text-2xl font-bold text-stone-900">@trans('Write a Review')</h1>
                             <p class="text-stone-500 mt-1">{{ $order->product->name }}</p>
                             <p class="text-sm text-stone-400 mt-2">Order #{{ $order->order_number }}</p>
                         </div>
@@ -27,7 +27,7 @@
 
                         <!-- Rating -->
                         <div>
-                            <label class="block text-sm font-medium text-stone-700 mb-2">Overall Rating</label>
+                            <label class="block text-sm font-medium text-stone-700 mb-2">@trans('Overall Rating')</label>
                             <div class="flex items-center gap-1" x-data="{ rating: 0, hover: 0 }">
                                 <input type="hidden" name="rating" :value="rating">
                                 <template x-for="i in 5">
@@ -51,7 +51,7 @@
 
                         <!-- Comment -->
                         <div>
-                            <label for="comment" class="block text-sm font-medium text-stone-700 mb-2">Your Review</label>
+                            <label for="comment" class="block text-sm font-medium text-stone-700 mb-2">@trans('Your Review')</label>
                             <textarea name="comment" id="comment" rows="4"
                                 class="w-full rounded-xl border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 placeholder-stone-400"
                                 placeholder="What did you like or dislike? How was the quality?"></textarea>
@@ -62,7 +62,7 @@
 
                         <!-- Photo Upload (Simplified) -->
                         <div>
-                            <label class="block text-sm font-medium text-stone-700 mb-2">Add a Photo</label>
+                            <label class="block text-sm font-medium text-stone-700 mb-2">@trans('Add a Photo')</label>
 
                             <div class="flex items-center gap-4">
                                 <div
@@ -74,15 +74,15 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M12 4v16m8-8H4"></path>
                                         </svg>
-                                        <span class="text-xs text-stone-500 block mt-1">Add</span>
+                                        <span class="text-xs text-stone-500 block mt-1">@trans('Add')</span>
                                     </div>
                                     <input type="file" name="image" id="image"
                                         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*"
                                         onchange="previewFile(this)">
                                 </div>
                                 <div class="text-sm text-stone-500">
-                                    <p class="font-medium text-stone-700">Upload an image</p>
-                                    <p class="text-xs mt-1">JPG, PNG up to 5MB</p>
+                                    <p class="font-medium text-stone-700">@trans('Upload an image')</p>
+                                    <p class="text-xs mt-1">@trans('JPG, PNG up to 5MB')</p>
                                 </div>
                             </div>
 
@@ -117,10 +117,10 @@
 
                         <div class="flex items-center justify-end gap-4 pt-4">
                             <a href="{{ route('buyer.orders.index') }}"
-                                class="text-stone-600 hover:text-stone-900 font-medium">Cancel</a>
+                                class="text-stone-600 hover:text-stone-900 font-medium">@trans('Cancel')</a>
                             <button type="submit"
                                 class="bg-emerald-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-200">
-                                Submit Review
+                                @trans('Submit Review')
                             </button>
                         </div>
                     </form>

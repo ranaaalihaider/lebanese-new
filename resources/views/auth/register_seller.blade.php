@@ -13,8 +13,8 @@
 
         <div class="w-full max-w-lg bg-white rounded-3xl shadow-xl p-8 border border-stone-100">
             <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold text-emerald-900">Become a Partner</h2>
-                <p class="text-stone-500 text-sm">Start selling directly to customers</p>
+                <h2 class="text-2xl font-bold text-emerald-900">@trans('Become a Partner')</h2>
+                <p class="text-stone-500 text-sm">@trans('Start selling directly to customers')</p>
             </div>
 
             <form method="POST" action="{{ route('register.seller') }}" class="space-y-6">
@@ -22,17 +22,17 @@
 
                 <!-- Personal Info Section -->
                 <div class="space-y-4">
-                    <h3 class="text-sm font-bold text-stone-900 border-b border-stone-100 pb-1 mb-2">Personal Information
+                    <h3 class="text-sm font-bold text-stone-900 border-b border-stone-100 pb-1 mb-2">@trans('Personal Information')
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 mb-1">Full Name</label>
+                            <label class="block text-xs font-bold text-stone-500 mb-1">@trans('Full Name')</label>
                             <input type="text" name="name"
                                 class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all"
                                 required autocomplete="name">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 mb-1">Phone Number</label>
+                            <label class="block text-xs font-bold text-stone-500 mb-1">@trans('Phone Number')</label>
                             <input type="tel" name="phone"
                                 class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all"
                                 required autocomplete="tel">
@@ -43,10 +43,10 @@
 
                 <!-- Store Info Section -->
                 <div class="space-y-4">
-                    <h3 class="text-sm font-bold text-stone-900 border-b border-stone-100 pb-1 mb-2 pt-2">Store Details</h3>
+                    <h3 class="text-sm font-bold text-stone-900 border-b border-stone-100 pb-1 mb-2 pt-2">@trans('Store Details')</h3>
 
                     <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Store Name</label>
+                        <label class="block text-xs font-bold text-stone-500 mb-1">@trans('Store Name')</label>
                         <input type="text" name="store_name"
                             class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all"
                             required>
@@ -60,11 +60,11 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 mb-1">Category</label>
+                            <label class="block text-xs font-bold text-stone-500 mb-1">@trans('Category')</label>
                             <select name="store_type_id"
                                 class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all"
                                 required onchange="toggleCustomStoreType(this)">
-                                <option value="">Select...</option>
+                                <option value="">@trans('Select...')</option>
                                 @foreach($storeTypes as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
@@ -72,11 +72,11 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 mb-1">Language</label>
+                            <label class="block text-xs font-bold text-stone-500 mb-1">@trans('Language')</label>
                             <select name="language_preference"
                                 class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all"
                                 required>
-                                <option value="EN">English</option>
+                                <option value="EN">@trans('English')</option>
                                 <option value="AR">Arabic (العربية)</option>
                                 <option value="HY">Armenian (Հայերեն)</option>
                                 <option value="FR">French (Français)</option>
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="hidden" id="custom_store_type_container">
-                        <label class="block text-xs font-bold text-stone-500 mb-1">New Category Name</label>
+                        <label class="block text-xs font-bold text-stone-500 mb-1">@trans('New Category Name')</label>
                         <input type="text" name="custom_store_type" id="custom_store_type"
                             class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all">
                     </div>
@@ -95,18 +95,18 @@
                         <input type="text" name="pickup_location" placeholder="e.g. Beirut, Hamra"
                             class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all"
                             required>
-                        <p class="text-xs text-stone-400 mt-1 pl-1">City or Area name only. No full address needed.</p>
+                        <p class="text-xs text-stone-400 mt-1 pl-1">@trans('City or Area name only. No full address needed.')</p>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 mb-1">Latitude</label>
+                            <label class="block text-xs font-bold text-stone-500 mb-1">@trans('Latitude')</label>
                             <input type="text" name="latitude" placeholder="e.g. 33.8938"
                                 class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all"
                                 required>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 mb-1">Longitude</label>
+                            <label class="block text-xs font-bold text-stone-500 mb-1">@trans('Longitude')</label>
                             <input type="text" name="longitude" placeholder="e.g. 35.5018"
                                 class="block w-full px-4 py-3 bg-stone-50 border-0 rounded-xl text-stone-900 focus:ring-2 focus:ring-emerald-500 transition-all"
                                 required>
@@ -130,7 +130,7 @@
 
                 <button type="submit"
                     class="w-full flex justify-center py-4 px-4 border border-transparent rounded-2xl shadow-lg text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all transform active:scale-95 mt-8">
-                    Submit Application
+                    @trans('Submit Application')
                 </button>
             </form>
 
